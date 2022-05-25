@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    width: 95%;
+    padding: 1%;
+    margin: 0 auto;
+    border-bottom: 1px solid black;
+}
+
+header, footer {
+    width: 100%;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* Header */
+
+header {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+}
+
+header > nav {
+    margin-left: auto;
+    margin-right: 1%;
+    text-decoration: none;
+}
+
+header > nav > a {
+    border: black solid 1px;
+    text-decoration: none;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    border-radius: 5px;
+    color: chocolate;
+    font-weight: bold;
+}
+
+header > nav > a:hover {
+    background-color: #f0f0f0;
+}
+
+header > h3 {
+    width: 100%;
+}
+
+/* Body */
+.foodCategory > fieldset{
+    border: none;
+}
+
+table {
+    width: 100%;
+}
+
+tr, td {
+    padding: 0.5em;
+    overflow: hidden;
+    word-break: normal;
+}
+
+table tr td img {
+    float: left;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+table .td-1 {
+    padding: 0 0;
+    width: 10%;
+    vertical-align: middle;
+}
+
+table .td-2 {
+    text-align: left;
+    vertical-align: middle;
+}
+
+table .td-3 {
+    width: 10%;
+    text-align: center;
+    vertical-align: middle;
+}
+/* Footer */
+
+footer > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+}
+
+footer > div > div {
+    margin-left: auto;
+}
+
+.fa {
+    padding: 10px;
+    width: 1em;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
