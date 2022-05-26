@@ -21,6 +21,7 @@ $cPrice = $row['categoryPrice'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
+    <link rel="icon" href="./resources/favicon.png">
     <link rel="stylesheet" href="css/menu.css">
     <script src="./js/menu.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
