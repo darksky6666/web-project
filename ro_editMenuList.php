@@ -1,7 +1,7 @@
 <?php
 include './db/db.php';
 $id = $_GET['id'];
-$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, menu.fc_ID, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.menu_ID=$id AND menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
+$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, menu.fc_ID, fc.categoryPrice, fc.categoryName, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.menu_ID=$id AND menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
 $result = mysqli_query($con, $sql) or die (mysqli_error());
 $row = mysqli_fetch_array($result);
 
@@ -10,6 +10,7 @@ $foodPhoto = $row['foodPhoto'];
 $foodDesc = $row['foodDesc'];
 $foodAvail = $row['foodAvailability'];
 $foodCat = $row['fc_ID'];
+$fcName=$row['categoryName'];
 $cPrice = $row['categoryPrice'];
 
 ?>
@@ -42,10 +43,11 @@ $cPrice = $row['categoryPrice'];
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>
 
-    <div class="wrapper">
+    <div class="wrapper container">
+        <div class="item1">
         <h3>Update menu</h3>
         <br>
-        <form action="./db/updatedb.php?id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
+        <form action="./db/updatedb.php?id=<?php echo $id; ?>&action=menu" method="POST" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
@@ -93,6 +95,17 @@ $cPrice = $row['categoryPrice'];
                 <input type="submit" value="Submit">
             </div>
         </form>
+        </div>
+
+        <div class="item2">
+            <h3>Category Price for <?php echo "$fcName" ?></h3>
+            <br>
+            <form action="./db/updatedb.php?foodCat=<?php echo $foodCat; ?>&action=category" method="POST" enctype="multipart/form-data">
+            <label for="catPrice-input">RM<input type="number" name="cPrice" id="catPrice-input" step="0.01" value="<?php printf("%.2f", $cPrice) ?>"></label>
+            <input type="submit" value="Update" class="btn">
+            </form>
+        </div>
+
     </div>
 
     <footer class="wrapper">

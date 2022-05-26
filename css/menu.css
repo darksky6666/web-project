@@ -19,6 +19,12 @@ header, footer {
     text-align: center;
 }
 
+.clearfix {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 /* Header */
 
 header {
@@ -54,6 +60,30 @@ header > h3 {
 }
 
 /* Body */
+.container {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-content: center;
+}
+
+.item2 {
+    margin: 0 auto;
+    margin-top: 20vh;
+}
+
+#catPrice-input {
+    width: fit-content;
+    max-width: 70px;
+}
+
+input {
+    padding: 1px 6px;
+}
+
+textarea {
+    padding: 5px 6px;
+}
+
 .foodCategory > fieldset{
     border: none;
 }
@@ -91,6 +121,14 @@ table .td-3 {
     text-align: center;
     vertical-align: middle;
 }
+
+.btn {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
 /* Footer */
 
 footer > div {

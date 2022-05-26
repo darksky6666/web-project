@@ -79,7 +79,7 @@ $rowcount=mysqli_num_rows($result);
         }
         ?>
         <br>
-        <input type="button" value="Add Menu" style="float: right" onclick="addMenu()">
+        <input type="button" class="btn" value="Add Menu" style="float: right" onclick="addMenu()">
         <br>
     </div>
 
