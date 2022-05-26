@@ -92,6 +92,43 @@ table {
     width: 100%;
 }
 
+.table-border {
+    border-collapse: collapse;
+}
+
+.table-border tr {
+    line-height: 30px;
+}
+
+.th {
+    width: 10%;
+    padding: 5px;
+    text-align: right;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.col-20 {
+    vertical-align: middle;
+    width: 40%;
+    padding: 5px;
+    text-align: left;
+}
+
+.con-table tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.con-table {
+    margin: 0 10vw;
+    width: 50%;
+}
+
+/* .t-border {
+    border-bottom: 1px solid black; 
+} */
+
 tr, td {
     padding: 0.5em;
     overflow: hidden;
