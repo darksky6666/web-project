@@ -14,4 +14,5 @@ else {
     echo "<script type = 'text/javascript'> alert('$failMsg') </script>";
     echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
 }
+mysqli_close();
 ?>

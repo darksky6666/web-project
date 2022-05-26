@@ -22,7 +22,12 @@ else {
     $imageName="";
 }
 
-$sql = "INSERT INTO `menu_list`(`foodName`, `foodPhoto`, `foodDesc`, `foodAvailability`, `fc_ID`) VALUES ('$foodName','$imageName','$foodDesc','$foodAvail','$foodCat')";
+$sql = sprintf("INSERT INTO `menu_list`(`foodName`, `foodPhoto`, `foodDesc`, `foodAvailability`, `fc_ID`) VALUES ('%s','%s','%s','%s','%s')", 
+                mysqli_real_escape_string($con,$foodName),
+                mysqli_real_escape_string($con,$imageName),
+                mysqli_real_escape_string($con,$foodDesc),
+                mysqli_real_escape_string($con,$foodAvail),
+                mysqli_real_escape_string($con,$foodCat) );
 $successMsg="Inserted Successfully";
 $failMsg="Failed to Insert";
 $result = mysqli_query($con,$sql) or die(mysqli_error());
@@ -37,4 +42,5 @@ else {
     echo "<script type = 'text/javascript'> alert('$failMsg') </script>";
     echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
 }
+mysqli_close();
 ?>

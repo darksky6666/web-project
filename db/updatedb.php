@@ -6,9 +6,9 @@ $action = $_GET['action'];
 
 switch ($action) {
     case 'category':
-        $sql="";
         $foodCat = $_GET['foodCat'];
-        $sql2="UPDATE `food_categories` SET `categoryPrice`='$cPrice' WHERE `fc_ID`='$foodCat';";
+        $sql2=sprintf("UPDATE `food_categories` SET `categoryPrice`='%s' WHERE `fc_ID`='$foodCat';",
+                        mysqli_real_escape_string($con,$cPrice) );
         $successMsg2="Category Updated Successfully";
         $failMsg2="Failed to Update Category";
         $result2 = mysqli_query($con,$sql2) or die(mysqli_error());
@@ -22,6 +22,28 @@ switch ($action) {
             echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
         }
         break;
+    
+    case 'rDetails':
+        $id=$_GET['id'];
+        // Prevent SQL Injection
+        $sql=sprintf("UPDATE `restaurant_details` SET `rdName`='%s',`rdLocation`='%s',`rdOpTime`='%s',`rdContactNo`='%s',`cuisinesType`='%s',`varietyType`='%s' WHERE `rd_ID`='$id';", 
+                    mysqli_real_escape_string($con,$rdName),
+                    mysqli_real_escape_string($con,$rdLocation),
+                    mysqli_real_escape_string($con,$rdOpTime),
+                    mysqli_real_escape_string($con,$rdContactNo),
+                    mysqli_real_escape_string($con,$cuisinesType),
+                    mysqli_real_escape_string($con,$varietyType) );
+        $result=mysqli_query($con,$sql) or die(mysqli_error());
+
+        if($result){
+            echo "<script type = 'text/javascript'> alert('Restaurant Details Updated Successfully') </script>";
+            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+        }
+        else {
+            echo "<script type = 'text/javascript'> alert('Failed to Update Restaurant Details') </script>";
+            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+        }
+        break;
 
     default:
         $id = $_GET['id'];
@@ -32,10 +54,19 @@ switch ($action) {
             $sourcePath=$_FILES['foodPhoto']['tmp_name'];
             $targetPath="../resources/menu/".$imageName;
             $upload=move_uploaded_file($sourcePath,$targetPath);
-            $sql = "UPDATE `menu_list` SET `foodName`='$foodName',`foodPhoto`='$imageName',`foodDesc`='$foodDesc',`foodAvailability`='$foodAvail',`fc_ID`='$foodCat' WHERE `menu_ID`=$id";
+            $sql = sprintf("UPDATE `menu_list` SET `foodName`='%s',`foodPhoto`='%s',`foodDesc`='%s',`foodAvailability`='%s',`fc_ID`='%s' WHERE `menu_ID`=$id", 
+                            mysqli_real_escape_string($con,$foodName),
+                            mysqli_real_escape_string($con,$imageName),
+                            mysqli_real_escape_string($con,$foodDesc),
+                            mysqli_real_escape_string($con,$foodAvail),
+                            mysqli_real_escape_string($con,$foodCat) );
         } 
         else {
-            $sql = "UPDATE `menu_list` SET `foodName`='$foodName',`foodDesc`='$foodDesc',`foodAvailability`='$foodAvail',`fc_ID`='$foodCat' WHERE `menu_ID`=$id";
+            $sql = sprintf("UPDATE `menu_list` SET `foodName`='%s',`foodDesc`='%s',`foodAvailability`='%s',`fc_ID`='%s' WHERE `menu_ID`=$id", 
+                            mysqli_real_escape_string($con,$foodName),
+                            mysqli_real_escape_string($con,$foodDesc),
+                            mysqli_real_escape_string($con,$foodAvail),
+                            mysqli_real_escape_string($con,$foodCat) );
         }
 
         $successMsg="Menu Updated Successfully";
@@ -51,4 +82,5 @@ switch ($action) {
             echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
         }
 }
+mysqli_close();
 ?>
