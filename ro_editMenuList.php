@@ -34,7 +34,7 @@ $cPrice = $row['categoryPrice'];
         <img src="resources/foodylogo.png" alt="Foody" width="5%">
         <nav>
             <a href="ro_menuList.php">Menu List</a>
-            <a href="#">Restaurant Details</a>
+            <a href="ro_restaurantDetails.php">Restaurant Details</a>
             <a href="#">Order List</a>
             <a href="#">Restaurant Report</a>
             <a href="#">Logout</a>
