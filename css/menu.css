@@ -64,7 +64,7 @@ header > h3 {
     float: right;
 }
 
-input[type=text] {
+#search {
     padding: 8px;
     font-size: 17px;
     border: none;

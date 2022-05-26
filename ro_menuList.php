@@ -39,7 +39,7 @@ $rowcount=mysqli_num_rows($result);
         <br>
         <div class="search-container">
             <form action="ro_searchMenu.php" method="post">
-                <input type="text" placeholder="Search Food Name..." name="search">
+                <input type="text" placeholder="Search Food Name..." name="search" id="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
