@@ -1,6 +1,8 @@
-<?php 
-include './db/db.php'; 
-$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
+<?php
+include './db/db.php';
+$search = $_POST['search'];
+$sql = sprintf("SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID AND menu.foodName LIKE '%s%%' ORDER BY menu.menu_ID;", 
+                mysqli_real_escape_string($con,$search) );
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -12,9 +14,9 @@ $rowcount=mysqli_num_rows($result);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <script src="js/menu.js"></script>
+    <script src="./js/menu.js"></script>
     <link rel="icon" href="./resources/favicon.png">
-    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="./css/menu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -37,12 +39,7 @@ $rowcount=mysqli_num_rows($result);
     <div class="menu wrapper">
         <h3 class="center-text">Menu List</h3>
         <br>
-        <div class="search-container">
-            <form action="ro_searchMenu.php" method="post">
-                <input type="text" placeholder="Search Food Name..." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+        <h4 class="center-text">Search Result for '<?php echo $search ?>'</h4>
         <br>
         <br>
         <?php
@@ -84,11 +81,15 @@ $rowcount=mysqli_num_rows($result);
             }
         }
         else {
-            echo "No data found";
+            ?>
+            <br>
+            <br>
+            <h4 style="color: red; font-weight: bold;">No data found!</h4>
+        <?php
         }
         ?>
         <br>
-        <input type="button" class="btn" value="Add Menu" style="float: right" onclick="addMenu()">
+        <input type="button" class="btn" value="Back" style="float: left" onclick="goBack()">
         <br>
     </div>
 

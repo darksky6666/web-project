@@ -60,6 +60,28 @@ header > h3 {
 }
 
 /* Body */
+.search-container {
+    float: right;
+}
+
+input[type=text] {
+    padding: 8px;
+    font-size: 17px;
+    border: none;
+}
+
+.search-container button {
+    float: right;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background: #ccc;
+}
+
 .container {
     display: grid;
     grid-template-columns: auto auto;
