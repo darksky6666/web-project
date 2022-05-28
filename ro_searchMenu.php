@@ -89,7 +89,7 @@ $rowcount=mysqli_num_rows($result);
         }
         ?>
         <br>
-        <input type="button" class="btn" value="Back" style="float: left" onclick="goBack()">
+        <input type="button" class="btn" value="Back" style="float: left" onclick="history.back()">
         <br>
     </div>
 
