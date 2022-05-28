@@ -1,3 +1,8 @@
+<?php
+// Set default display for img
+$foodPhoto="no-image.png";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
+    <script src="./js/menu.js"></script>
     <link rel="icon" href="./resources/favicon.png">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -34,7 +40,12 @@
             <table>
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
-                    <td><input type="file" name="foodPhoto" id="foodPhoto"></td>
+                    <td>
+                        <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <br>
+                        <br>
+                        <input type="file" name="foodPhoto" id="foodPhoto" onchange="previewImg(this)">
+                    </td>
                 </tr>
                 <tr>
                     <td>Food Name</td>
