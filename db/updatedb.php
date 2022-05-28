@@ -49,7 +49,6 @@ switch ($action) {
         $id = $_GET['id'];
         print_r($_FILES['foodPhoto']['name']);
         if (isset( $_FILES['foodPhoto']['name'] ) && $_FILES['foodPhoto']['name'] != '' ) {
-            $image=$_FILES['foodPhoto']['name'];
             $imageName=$id . str_replace(" ", "-", strtolower("$foodName")). ".png";
             $sourcePath=$_FILES['foodPhoto']['tmp_name'];
             $targetPath="../resources/menu/".$imageName;
