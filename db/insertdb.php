@@ -6,7 +6,7 @@ $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 
 if (isset($_FILES['foodPhoto']['name']) && $_FILES['foodPhoto']['name'] != '') {
-    $imageName=++$rowcount . str_replace(" ", "-", strtolower("$foodName")). ".png";
+    $imageName=++$rowcount . "-" . str_replace(" ", "-", strtolower("$foodName")). ".png";
     $sourcePath=$_FILES['foodPhoto']['tmp_name'];
     $targetPath="../resources/menu/".$imageName;
     $upload=move_uploaded_file($sourcePath,$targetPath);

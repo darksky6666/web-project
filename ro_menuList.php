@@ -57,6 +57,9 @@ $rowcount=mysqli_num_rows($result);
         <br>
         <br>
         <?php
+        if ($rowcount<10) {
+            echo("<h4 class='error'>At least 10 food items are required. (" . $rowcount . "/10)". "</h4>");
+        }
         if($rowcount>0){
             while ($row=mysqli_fetch_assoc($result)) {
             $id=$row['menu_ID'];
