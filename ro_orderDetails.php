@@ -96,6 +96,7 @@ $totalPrice=0;
                 <br>
                 <form action="./db/updateOrderStatus.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <!-- <input class="btn" type="submit" name="status" value="Ordered"> -->
                     <input class="btn" type="submit" name="status" value="Prepared">
                     <input class="btn" type="submit" name="status" value="Cancel">
                 </form>
