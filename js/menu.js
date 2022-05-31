@@ -11,3 +11,25 @@ function checkData() {
     }
     return true;
 }
+
+function filterCat(catName) {
+    const fCat = document.getElementsByClassName("fCat");
+
+    // If all categories are selected, show all foods
+    if (catName === "All") {
+        for (let i = 0; i < fCat.length; i++) {
+            fCat[i].parentElement.style.display = "block";
+        }
+    // If a category is selected, show only the foods in that category
+    } else {
+        for (let i = 0; i < fCat.length; i++) {
+            // If food category is not the selected category, hide it
+            if (fCat[i].innerHTML !== catName) {
+                fCat[i].parentElement.style.display = "none";
+            } else {
+            // If food category is the selected category, show it
+                fCat[i].parentElement.style.display = "block";
+            }
+        }
+    }
+}

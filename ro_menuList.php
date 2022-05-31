@@ -1,6 +1,6 @@
 <?php 
 include './db/db.php'; 
-$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
+$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryName, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -37,6 +37,17 @@ $rowcount=mysqli_num_rows($result);
     <div class="menu wrapper">
         <h3 class="center-text">Menu List</h3>
         <br>
+        <div>
+            Filter: <input type='button' class='btn' value='All' onclick="filterCat(this.value)">
+            <?php 
+            $sql2 = "SELECT * FROM `food_categories` ORDER BY `categoryName`;";
+            $result2=mysqli_query($con,$sql2) or die (mysqli_error());
+            while ($row2=mysqli_fetch_assoc($result2)) {
+                $fCat = $row2['categoryName'];
+                echo("<input type='button' class='btn' value='$fCat' onclick='filterCat(this.value)'>");
+            }
+            ?>
+        </div>
         <div class="search-container">
             <form action="ro_searchMenu.php" method="post">
                 <input type="text" placeholder="Search Food Name..." name="search" id="search">
@@ -53,9 +64,12 @@ $rowcount=mysqli_num_rows($result);
             $foodPhoto=$row['foodPhoto'];
             $foodDesc=$row['foodDesc'];
             $foodAvailability=$row['foodAvailability'];
+            $categoryName=$row['categoryName'];
             $fPrice=$row['categoryPrice'];
             ?>
+            <div>
             <table>
+                <span class="fCat" style="display: none;"><?php echo $categoryName ?></span>
                 <tr>
                     <td rowspan=2 class="td-1">
                         <img src="./resources/menu/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
@@ -80,6 +94,7 @@ $rowcount=mysqli_num_rows($result);
                 </tr>
                 <br>
             </table>
+            </div>
         <?php
             }
         }
