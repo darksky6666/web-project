@@ -89,13 +89,13 @@ $totalPrice=0;
                     </tr>
                 </table>
                 <br>
-                <input class="btn" type="button" value="Back" onclick="history.back()">
+                <input class="btn" type="button" value="Back" onclick="window.location='ro_orderList.php';">
             </div>
             <div class="flex-item order-status">
                 <h4>Order Status: <span style="padding-left: 0.8em;"><?php echo $orderStatus ?></span></h4>
                 <br>
-                <form action="" method="post">
-                    <input type="hidden" name="orderID" value="<?php echo $id ?>">
+                <form action="./db/updateOrderStatus.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
                     <input class="btn" type="submit" name="status" value="Prepared">
                     <input class="btn" type="submit" name="status" value="Cancel">
                 </form>
