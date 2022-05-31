@@ -106,7 +106,7 @@ $rowcount=mysqli_num_rows($result);
         }
         ?>
         <br>
-        <input type="button" class="btn" value="Add Menu" style="float: right" onclick="window.location.href = '../ro_addMenuList.php';return false;">
+        <input type="button" class="btn" value="Add Menu" style="float: right" onclick="window.location.href = './ro_addMenuList.php';">
         <br>
     </div>
 
