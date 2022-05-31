@@ -36,7 +36,7 @@ $foodPhoto="no-image.png";
     <div class="wrapper">
         <h3>Add new menu</h3>
         <br>
-        <form action="./db/insertdb.php" method="POST" enctype="multipart/form-data">
+        <form action="./db/insertdb.php" name="addForm" method="POST" enctype="multipart/form-data" onsubmit="return checkData()">
             <table>
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
@@ -44,30 +44,38 @@ $foodPhoto="no-image.png";
                         <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                         <br>
                         <br>
-                        <input type="file" name="foodPhoto" id="foodPhoto" onchange="previewImg(this)">
+                        <input type="file" name="foodPhoto" id="foodPhoto" accept="image/png, image/jpeg" onchange="previewImg(this)">
+                        <span class="error" id="picErr"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>Food Name</td>
-                    <td><input type="text" name="foodName" value=""></td>
+                    <td>
+                        <input type="text" name="foodName" value="" required>
+                        <span class="error">*</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Food Description</td>
-                    <td><textarea name="foodDesc" cols="40" rows="5"></textarea></td>
+                    <td>
+                        <textarea name="foodDesc" cols="40" rows="5" required></textarea>
+                        <span class="error">*</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Food Availability</td>
                     <td>
-                        <select name="foodAvail">
+                        <select name="foodAvail" required>
                             <option value="Available">Available</option>
                             <option value="Not Available">Not Available</option>
                         </select>
+                        <span class="error">*</span>
                     </td>
                 </tr>
                 <tr>
                     <td>Food Category</td>
                     <td>
-                        <select name="foodCat">
+                        <select name="foodCat" required>
                             <option value="">Select Category</option>
                             <option value="6">Beverages</option>
                             <option value="1">Chicken</option>
@@ -76,6 +84,7 @@ $foodPhoto="no-image.png";
                             <option value="5">Rice</option>
                             <option value="3">Soup</option>
                         </select>
+                        <span class="error">*</span>
                     </td>
                 </tr>
             </table>
