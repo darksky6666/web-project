@@ -1,6 +1,6 @@
 <?php
 include './db/db.php';
-$sql="SELECT * FROM `order_list`;";
+$sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username;";
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -33,101 +33,38 @@ $rowcount=mysqli_num_rows($result);
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>
 
-    
-    <form action="" method="post">
     <div class="wrapper">
-
-        <div>
-            <span>Filter: </span>
-            <input type="button" value="Canceled">
-            <input type="button" value="Prepared">
-            <input type="button" value="Ordered">
+    <h2>Order List</h2>
+    <br><br>
+        <div class="order-list">
+            <table class="order-list-table">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Order Date</th>
+                    <th>Order Time</th>
+                    <th>Order Status</th>
+                    <th>Actions</th>
+                </tr>
+                <?php
+                if($rowcount>0){
+                    while($row=mysqli_fetch_array($result)){
+                        echo "<tr>";
+                        echo "<td>".$row['orderID']."</td>";
+                        echo "<td>".$row['name']."</td>";
+                        echo "<td>".$row['address']."</td>";
+                        echo "<td>".$row['orderDate']."</td>";
+                        echo "<td>".$row['orderTime']."</td>";
+                        echo "<td>".$row['orderStatus']."</td>";
+                        echo "<td><a class='btn' href='ro_orderDetails.php?orderID=".$row['orderID']."'>Details</a></td>";
+                        echo "</tr>";
+                    }
+                }
+                ?>
+            </table>
         </div>
-    <div class="cards">
-        <?php
-        if($rowcount>0){
-            while ($row=mysqli_fetch_assoc($result)) {
-            // echo $row['order_id'];
-            }
-        } else {
-            //echo "No data found";
-        }
-        ?>
-
-        <!-- First data -->
-        <div class="card">
-            <div class="cardHighlight border-radius-top">
-                <p>Name: <span class="text-bold">Wong Yi Bo</span></p>
-                <br>
-                <p>Address: <span class="text-bold">Residen Pelajar 5, Blok A, Universiti Malaysia Pahang, Kampus Pekan.</span></p>
-            </div>
-            <div class="cardContent bg-gy">
-                <ul>
-                    <li>Nasi Goreng Cina, 3</li>
-                    <li>Guava Juice, 1</li>
-                    <li>Ice Latte, 2</li>
-                </ul>
-            </div>
-            <div class="cardStatus">
-                <p>Status: <span class="text-bold">Ordered</span> </p>
-            </div>
-            <div class="cardInfo border-radius-bottom">
-                <input type="submit" value="Prepared">
-                <input type="submit" value="Cancel">
-            </div>
-        </div>
-
-        <!-- Second data -->
-        <div class="card">
-            <div class="cardHighlight border-radius-top">
-                <p>Name: <span class="text-bold">Zulkifli bin Salleh</span></p>
-                <br>
-                <p>Address: <span class="text-bold">No 2A, Jalan Megah,Taman Sri Impian, Pekan Pahang</span></p>
-            </div>
-            <div class="cardContent bg-gy">
-                <ul>
-                    <li>Nasi Goreng Pataya, 2</li>
-                    <li>Chicken Chop, 1</li>
-                    <li>Mocha Ice Blended, 1</li>
-                    <li>Milo Dinosaur, 2</li>
-                </ul>
-            </div>
-            <div class="cardStatus">
-                <p>Status: <span class="text-bold">Ordered</span> </p>
-            </div>
-            <div class="cardInfo border-radius-bottom">
-                <input type="submit" value="Prepared">
-                <input type="submit" value="Cancel">
-            </div>
-        </div>
-
-        <!-- Third data -->
-        <div class="card">
-            <div class="cardHighlight border-radius-top">
-                <p>Name: <span class="text-bold">Ajay A/L Darsh</span></p>
-                <br>
-                <p>Address: <span class="text-bold">Residen Pelajar 2, Blok C, Universiti Malaysia Pahang, Kampus Gambang.</span></p>
-            </div>
-            <div class="cardContent bg-gy">
-                <ul>
-                    <li>Bihun Goreng, 3</li>
-                    <li>Teh Beng, 2</li>
-                </ul>
-            </div>
-            <div class="cardStatus">
-                <p>Status: <span class="text-bold">Ordered</span> </p>
-            </div>
-            <div class="cardInfo border-radius-bottom">
-                <input type="submit" value="Prepared">
-                <input type="submit" value="Cancel">
-            </div>
-        </div>
-        
     </div>
-    <br>
-    <br>
-    </div>
-</form>
 
     <footer class="wrapper">
         <div>
@@ -146,3 +83,6 @@ $rowcount=mysqli_num_rows($result);
     </footer>
 </body>
 </html>
+<?php
+mysqli_close($con);
+?>
