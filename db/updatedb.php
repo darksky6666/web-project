@@ -5,6 +5,7 @@ extract($_POST);
 $action = $_GET['action'];
 
 switch ($action) {
+    // Update Food Category
     case 'category':
         $foodCat = $_GET['foodCat'];
         $sql2=sprintf("UPDATE `food_categories` SET `categoryPrice`='%s' WHERE `fc_ID`='$foodCat';",
@@ -23,6 +24,7 @@ switch ($action) {
         }
         break;
     
+    // Update restaurant details 
     case 'rDetails':
         $id=$_GET['id'];
         // Prevent SQL Injection
@@ -45,7 +47,15 @@ switch ($action) {
         }
         break;
 
+    // Update Menu List
     default:
+        // Delete the old photo
+        $loc="../resources/menu/$oldPhoto";
+        if (is_file($loc)) {
+            // If Linux user, please uncomment the line below
+            // chmod($loc, 0777);
+            unlink(realpath($loc));
+        }
         $id = $_GET['id'];
         print_r($_FILES['foodPhoto']['name']);
         if (isset( $_FILES['foodPhoto']['name'] ) && $_FILES['foodPhoto']['name'] != '' ) {

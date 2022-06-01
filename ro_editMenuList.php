@@ -93,6 +93,8 @@ $cPrice = $row['categoryPrice'];
             </table>
             <br>
             <div>
+                <!-- Send oldPhoto name -->
+                <input type="hidden" name="oldPhoto" value="<?php echo $foodPhoto ?>">
                 <input type="submit" value="Submit">
             </div>
         </form>

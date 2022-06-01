@@ -84,7 +84,7 @@ $rowcount=mysqli_num_rows($result);
                         <?php echo $foodAvailability; ?>
                     </td>
                     <td rowspan=2 class="td-3">
-                        <a href='ro_editMenuList.php?id=<?php echo $id ?>'>Edit</a> &nbsp <a href='./db/deletedb.php?id=<?php echo $id ?>'>Delete</a>
+                        <a href='ro_editMenuList.php?id=<?php echo $id ?>'>Edit</a> &nbsp <a href='./db/deletedb.php?id=<?php echo $id ?>&foodPhoto=<?php echo $foodPhoto ?>'>Delete</a>
                     </td>
                 </tr>
                 <tr>
