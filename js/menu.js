@@ -33,3 +33,10 @@ function filterCat(catName) {
         }
     }
 }
+
+function totalOrderPrice(price) {
+    let total = document.getElementById("total");
+    let totalPrice = parseFloat(total.innerHTML);
+    totalPrice += parseFloat(price);
+    total.innerHTML = totalPrice.toFixed(2);
+}
