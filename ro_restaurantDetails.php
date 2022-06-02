@@ -66,7 +66,7 @@ $varietyType = $row['varietyType'];
                 </tr>
                 <tr>
                     <td class="t-border th">Contact No</td>
-                    <td class="t-border col-20"><input type="tel" name="rdContactNo" size="23px" value="<?php echo $rdContactNo ?>"></td>
+                    <td class="t-border col-20"><input type="tel" placeholder="0123456789" pattern="[0-9]{2,3}-*[0-9]{7,8}" name="rdContactNo" size="23px" value="<?php echo $rdContactNo ?>"></td>
                 </tr>
                 <tr>
                     <td class="t-border th">Cuisine Type</td>
