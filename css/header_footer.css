@@ -22,7 +22,7 @@ header > nav > a {
     border-radius: 5px;
     color: black;
     font-weight: bold;
-    /* font-size: 18px; */
+    font-size: 18px;
 }
 
 header > nav > a:hover {
@@ -39,7 +39,7 @@ header > h3 {
     width: 100%;
     text-align: center;
     font-family: Georgia Garamond;
-    /* font-size: 300%; */
+    font-size: 300%;
 }
 
 /* Footer */

@@ -49,16 +49,16 @@ switch ($action) {
 
     // Update Menu List
     default:
-        // Delete the old photo
-        $loc="../resources/menu/$oldPhoto";
-        if (is_file($loc)) {
-            // If Linux user, please uncomment the line below
-            // chmod($loc, 0777);
-            unlink(realpath($loc));
-        }
         $id = $_GET['id'];
         print_r($_FILES['foodPhoto']['name']);
         if (isset( $_FILES['foodPhoto']['name'] ) && $_FILES['foodPhoto']['name'] != '' ) {
+            // Delete the old photo
+            $loc="../resources/menu/$oldPhoto";
+            if (is_file($loc)) {
+                // If Linux user, please uncomment the line below
+                // chmod($loc, 0777);
+                unlink(realpath($loc));
+            }
             $imageName=$id . str_replace(" ", "-", strtolower("$foodName")). ".png";
             $sourcePath=$_FILES['foodPhoto']['tmp_name'];
             $targetPath="../resources/menu/".$imageName;
