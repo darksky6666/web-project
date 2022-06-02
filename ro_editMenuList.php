@@ -23,6 +23,7 @@ $cPrice = $row['categoryPrice'];
     <title>Foody</title>
     <link rel="icon" href="./resources/favicon.png">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/header_footer.css">
     <script src="./js/menu.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
