@@ -76,11 +76,11 @@ $rowcount=mysqli_num_rows($result);
             </div>
         </div>
         <br><i class="material-icons">location_on</i>
-        <p> Universiti Malaysia Pahang 26600 Pekan Pahang, Malaysia. </p>
+        <span class="icon-text"> Universiti Malaysia Pahang 26600 Pekan Pahang, Malaysia. </span>
         <br><i class="material-icons">local_phone</i>
-        <p> +609 431 5000 </p>
+        <span class="icon-text"> +609 431 5000 </span>
         <br><i class="material-icons">email</i>
-        <p>pro@ump.edu.my </p>
+        <span class="icon-text"> pro@ump.edu.my </span>
     </footer>
 </body>
 </html>
