@@ -12,7 +12,7 @@ $rowcount=mysqli_num_rows($result);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <script src="js/menu.js"></script>
+    <script src="./js/menu.js"></script>
     <link rel="icon" href="./resources/favicon.png">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/header_footer.css">

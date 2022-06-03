@@ -2,6 +2,11 @@
 include 'db.php';
 $id = $_GET['id'];
 $foodPhoto = $_GET['foodPhoto'];
+
+// Delete confirmation
+echo "<script src='../js/menu.js'></script>";
+echo "<script type = 'text/javascript'> deleteConfirmBox() </script>";
+
 $sql = "DELETE FROM `menu_list` WHERE `menu_ID`='$id'";
 
 $result = mysqli_query($con,$sql) or die(mysqli_error());

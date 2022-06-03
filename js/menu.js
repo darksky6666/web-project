@@ -34,6 +34,13 @@ function filterCat(catName) {
     }
 }
 
+function deleteConfirmBox() {
+    let deleteConfirm = confirm('Are you sure you want to remove this entry?\nThis process is not reversible.');
+    if (deleteConfirm != true) {
+        window.location.href = history.back();
+    }
+}
+
 function totalOrderPrice(price) {
     let total = document.getElementById("total");
     let totalPrice = parseFloat(total.innerHTML);
