@@ -11,10 +11,6 @@
     border-bottom: 1px solid black;
 }
 
-header, footer {
-    width: 100%;
-}
-
 .center-text {
     text-align: center;
 }

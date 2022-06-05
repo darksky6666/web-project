@@ -34,6 +34,7 @@ $varietyType = $row['varietyType'];
         <img src="resources/umplogo.png" alt="UMP" width="5%">
         <img src="resources/foodylogo.png" alt="Foody" width="5%">
         <nav>
+            <a href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
             <a class="active" href="ro_restaurantDetails">Restaurant Details</a>
             <a href="ro_orderList.php">Order List</a>
