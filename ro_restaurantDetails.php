@@ -37,7 +37,7 @@ $varietyType = $row['varietyType'];
             <a href="ro_menuList.php">Menu List</a>
             <a class="active" href="ro_restaurantDetails">Restaurant Details</a>
             <a href="ro_orderList.php">Order List</a>
-            <a href="#">Restaurant Report</a>
+            <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
         <img src="resources/profile.jpg" alt="profile" width="5%">

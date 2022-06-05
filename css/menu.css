@@ -19,6 +19,10 @@ header, footer {
     text-align: center;
 }
 
+.right-text {
+    text-align: right;
+}
+
 .clearfix {
     content: "";
     display: table;
@@ -30,6 +34,10 @@ header, footer {
 }
 
 /* Body */
+.height-50 {
+    min-height: 50vh;
+}
+
 .search-container {
     float: right;
 }
@@ -156,4 +164,28 @@ table .td-3 {
     display: inline-block;
     margin-left: 0.5em;
     margin-right: 0.5em;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: top;
+    /* align-content: center; */
+    margin: 0 auto;
+    width: 100%;
+    gap: 0 1em;
+}
+
+.flex-item > h5 {
+    font-size: 1.1em;
+}
+
+.flex-item > p {
+    font-size: 1em;
+}
+
+.flex-item td {
+    padding-left: 0;
 }

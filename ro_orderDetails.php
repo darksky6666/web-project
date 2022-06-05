@@ -40,7 +40,7 @@ $totalPrice=0;
             <a href="ro_menuList.php">Menu List</a>
             <a href="ro_restaurantDetails.php">Restaurant Details</a>
             <a class="active" href="ro_orderList.php">Order List</a>
-            <a href="#">Restaurant Report</a>
+            <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
         <img src="resources/profile.jpg" alt="profile" width="5%">

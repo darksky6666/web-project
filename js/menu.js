@@ -40,10 +40,3 @@ function deleteConfirmBox() {
         window.location.href = history.back();
     }
 }
-
-function totalOrderPrice(price) {
-    let total = document.getElementById("total");
-    let totalPrice = parseFloat(total.innerHTML);
-    totalPrice += parseFloat(price);
-    total.innerHTML = totalPrice.toFixed(2);
-}
