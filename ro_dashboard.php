@@ -1,6 +1,9 @@
 <?php
 include './db/db.php';
-$RO_username='RE10001';
+session_start();
+$_SESSION['RO_username']='RE10001';
+$RO_username=$_SESSION['RO_username'];
+
 $sqlrName="SELECT `rdName` FROM `restaurant_details` WHERE `RO_username`='$RO_username';";
 $resultrName=mysqli_query($con,$sqlrName) or die (mysqli_error());
 $rowrName=mysqli_fetch_assoc($resultrName);
@@ -182,6 +185,11 @@ while ($w-- > 0 && $rowAmount=mysqli_fetch_array($resultAmount)) {
             color: red;
             font-size: small;
         }
+
+        .welcome {
+            font-size: large;
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -204,6 +212,15 @@ while ($w-- > 0 && $rowAmount=mysqli_fetch_array($resultAmount)) {
 
     <div class="wrapper">
         <h2 class="center-text">Dashboard</h2>
+        <br>
+        <?php
+            // Get restaurant name
+            $sqlRestaurantName = "SELECT `rdName` FROM `restaurant_details` WHERE `RO_username` = '$RO_username';";
+            $resultRestaurantName = mysqli_query($con, $sqlRestaurantName);
+            $rowRestaurantName = mysqli_fetch_assoc($resultRestaurantName);
+            $rdName = $rowRestaurantName['rdName'];
+        ?>
+        <h2 class="center-text welcome">Welcome, <?php echo $rdName ?></h2>
         <br>
         <div class="row">
             <div class="column">
