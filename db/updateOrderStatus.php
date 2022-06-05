@@ -1,5 +1,7 @@
 <?php
 include 'db.php';
+$status=$_GET['status'] ?? '';
+$id=$_GET['id'] ?? '';
 extract($_POST);
 
 $sql="UPDATE `order_list` SET `orderStatus`='$status' WHERE `orderID`=$id;";

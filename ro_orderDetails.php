@@ -30,6 +30,8 @@ $totalPrice=0;
     <link rel="stylesheet" href="css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="./js/qr.js"></script>
 </head>
 
 <body>
@@ -90,17 +92,26 @@ $totalPrice=0;
                     </tr>
                 </table>
                 <br>
+                <br>
+                <br>
                 <input class="btn" type="button" value="Back" onclick="window.location='ro_orderList.php';">
             </div>
             <div class="flex-item order-status">
                 <h4>Order Status: <span style="padding-left: 0.8em;"><?php echo $orderStatus ?></span></h4>
+                <br><br>
+                <!-- <input class="btn" type="button" name="status" value="Ordered" onclick="generateQR('<?php echo $id ?>', 'Ordered')"> -->
+                <input class="btn" type="button" name="status" value="Prepared" onclick="generateQR('<?php echo $id ?>', 'Prepared')">
+                <input class="btn" type="button" name="status" value="Cancel" onclick="generateQR('<?php echo $id ?>', 'Cancel')">
+                <br><br><br>
+                <div id="statusText"></div>
                 <br>
-                <form action="./db/updateOrderStatus.php" method="post">
+                <div id="qrcode"></div>
+                <!-- <form action="./db/updateOrderStatus.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $id ?>">
-                    <!-- <input class="btn" type="submit" name="status" value="Ordered"> -->
+                    <input class="btn" type="submit" name="status" value="Ordered">
                     <input class="btn" type="submit" name="status" value="Prepared">
                     <input class="btn" type="submit" name="status" value="Cancel">
-                </form>
+                </form> -->
             </div>
         </div>
     </div>
