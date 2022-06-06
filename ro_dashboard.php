@@ -1,7 +1,7 @@
 <?php
 include './db/db.php';
 session_start();
-$_SESSION['RO_username']='RE10004';
+$_SESSION['RO_username']='RE10001';
 $RO_username=$_SESSION['RO_username'];
 
 $sqlrName="SELECT `rdName` FROM `restaurant_details` WHERE `RO_username`='$RO_username';";
@@ -295,7 +295,7 @@ while ($w-- > 0 && $rowAmount=mysqli_fetch_array($resultAmount)) {
             <div class="column order-summary">
                 <div class="card">
                     <h3>Orders Summary</h3>
-                    <h5>Summary of total orders in <?php echo $rdName ?></h5>
+                    <h5>Summary of total order price in <?php echo $rdName ?></h5>
                     <br>
                     <canvas id="chartTotalAmount" style="width:100%;max-width:700px"></canvas>
                 </div>

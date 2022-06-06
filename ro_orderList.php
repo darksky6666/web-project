@@ -1,6 +1,6 @@
 <?php
 include './db/db.php';
-$sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username;";
+$sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username ORDER BY ol.orderDate DESC";
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -50,10 +50,11 @@ $rowcount=mysqli_num_rows($result);
                     <th>Actions</th>
                 </tr>
                 <?php
+                $i=0;
                 if($rowcount>0){
                     while($row=mysqli_fetch_array($result)){
                         echo "<tr>";
-                        echo "<td>".$row['orderID']."</td>";
+                        echo "<td>".++$i."</td>";
                         echo "<td>".$row['name']."</td>";
                         echo "<td>".$row['address']."</td>";
                         echo "<td>".$row['orderDate']."</td>";

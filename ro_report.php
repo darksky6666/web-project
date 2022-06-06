@@ -8,7 +8,8 @@ else {
     $monthSelector = date('Y-m', strtotime("-1 months"));
 }
 
-$RO_username="RE10001";
+session_start();
+$RO_username=$_SESSION['RO_username'];
 
 include './db/getInsight.php';
 ?>
@@ -50,6 +51,7 @@ include './db/getInsight.php';
             var tFCom = calcFoodyCommission(tPay);
             var tRCom =calcRiderCommission(tPay);
             calcProfit(tPay, tFCom, tRCom);
+            calcAccumulatedPayment();
         }
 
         // Get highest and lowest value
@@ -102,6 +104,15 @@ include './db/getInsight.php';
             var riderCommission = tRCom;
             var profit = totalPayment - foodyCommission - riderCommission;
             document.getElementById('profit').innerHTML = profit.toFixed(2);
+        }
+
+        // Calculate Accumulated Payment
+        function calcAccumulatedPayment() {
+            var accumulatedPayment = 0;
+            for (var i = 0; i < y_accumulated.length; i++) {
+                accumulatedPayment += parseFloat(y_accumulated[i]);
+            }
+            document.getElementById('accumulatedPayment').innerHTML = accumulatedPayment.toFixed(2);
         }
 
         // Total amount
@@ -286,6 +297,13 @@ include './db/getInsight.php';
             <div class="flex-item">
                 <h5>Accumulated Received Payment Since Joined Foody</h5>
                 <canvas id="chartAccumulatedPayment" style="width:100%;max-width:700px"></canvas>
+                <br>
+                <table>
+                    <tr>
+                        <td>Accumulated Payment:</td>
+                        <td class="right-text">RM <span id="accumulatedPayment"></span></td>
+                    </tr>
+                </table>
             </div>
             <!-- 
                 Commission

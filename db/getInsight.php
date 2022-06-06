@@ -30,7 +30,7 @@ while ($dayNum-- > 0 && $rowOrder=mysqli_fetch_array($resultOrder)) {
 }
 
 // Total accumulated payment
-$sqlAccumulated="SELECT MONTH(`orderDate`), SUM(`totalAmount`) FROM `order_list` WHERE `RO_username`='$RO_username' AND MONTH(`orderDate`)='$month' AND YEAR(`orderDate`)='$year' GROUP BY MONTH(`orderDate`) ORDER BY `orderDate` ASC";
+$sqlAccumulated="SELECT MONTH(`orderDate`), SUM(`totalAmount`) FROM `order_list` WHERE `RO_username`='$RO_username' GROUP BY MONTH(`orderDate`) ORDER BY `orderDate` ASC";
 $resultAccumulated=mysqli_query($con,$sqlAccumulated) or die(mysqli_error($con));
 
 $monthAccumulated=array();
