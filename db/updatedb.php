@@ -46,6 +46,26 @@ switch ($action) {
             echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
         }
         break;
+    
+    case 'rDetailsAdd':
+        $sql=sprintf("INSERT INTO `restaurant_details`(`rdName`, `rdLocation`, `rdOpTime`, `rdContactNo`, `cuisinesType`, `varietyType`, `RO_username`) VALUES ('%s','%s','%s','%s','%s','%s', '%s');", 
+                    mysqli_real_escape_string($con,$rdName),
+                    mysqli_real_escape_string($con,$rdLocation),
+                    mysqli_real_escape_string($con,$rdOpTime),
+                    mysqli_real_escape_string($con,$rdContactNo),
+                    mysqli_real_escape_string($con,$cuisinesType),
+                    mysqli_real_escape_string($con,$varietyType),
+                    mysqli_real_escape_string($con,$RO_username) );
+        $result=mysqli_query($con,$sql) or die(mysqli_error());
+        if($result){
+            echo "<script type = 'text/javascript'> alert('Restaurant Details Updated Successfully') </script>";
+            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+        }
+        else {
+            echo "<script type = 'text/javascript'> alert('Failed to Update Restaurant Details') </script>";
+            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+        }
+        break;
 
     // Update Menu List
     default:
@@ -91,5 +111,5 @@ switch ($action) {
             echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
         }
 }
-mysqli_close();
+mysqli_close($con);
 ?>

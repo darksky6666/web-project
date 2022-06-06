@@ -1,19 +1,22 @@
 <?php
 include './db/db.php';
-// Temp placeholder
-$username="RE10003";
+session_start();
+$RO_username=$_SESSION['RO_username'];
 
-$sql="SELECT * FROM `restaurant_details` WHERE RO_username='$username';";
+$sql="SELECT * FROM `restaurant_details` WHERE RO_username='$RO_username';";
 $result = mysqli_query($con, $sql) or die (mysqli_error());
 $row = mysqli_fetch_array($result);
+$numRow = mysqli_num_rows($result);
 
-$id = $row['rd_ID'];
-$rdName = $row['rdName'];
-$rdLocation = $row['rdLocation'];
-$rdOpTime = $row['rdOpTime'];
-$rdContactNo = $row['rdContactNo'];
-$cuisinesType = $row['cuisinesType'];
-$varietyType = $row['varietyType'];
+
+$id = $row['rd_ID'] ?? NULL;
+$rdName = $row['rdName']  ?? NULL;
+$rdLocation = $row['rdLocation'] ?? NULL;
+$rdOpTime = $row['rdOpTime'] ?? NULL;
+$rdContactNo = $row['rdContactNo'] ?? NULL;
+$cuisinesType = $row['cuisinesType'] ?? NULL;
+$varietyType = $row['varietyType'] ?? NULL;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,9 +52,23 @@ $varietyType = $row['varietyType'];
     <div class="wrapper">
         <br>
         <h3 style="text-align: center;">Manage Restaurant Details</h3>
+        <?php
+            if ($numRow == 0) {
+                echo('<h4 class="error" style="text-align: center;">No Restaurant Details Found</h4>');
+                echo('<h4 class="error" style="text-align: center;">Please add your restaurant detaiils.</h4>');
+            }
+        ?>
         <br>
         <br>
-        <form action="./db/updatedb.php?id=<?php echo $id ?>&action=rDetails" method="post">
+        <?php
+            if ($numRow > 0) {
+                echo("<form action='./db/updatedb.php?id=$id&action=rDetails' method='post'>");
+            }
+            else {
+                echo("<form action='./db/updatedb.php?action=rDetailsAdd' method='post'>");
+            }
+        ?>
+        
             <div class="con-table">
             <table class="table-border">
                 <tr>
@@ -64,7 +81,7 @@ $varietyType = $row['varietyType'];
                 </tr>
                 <tr>
                     <td class="t-border th">Operating Time</td>
-                    <td class="t-border col-20"><input type="text" name="rdOpTime" size="23px" value="<?php echo $rdOpTime ?>"></td>
+                    <td class="t-border col-20"><input type="text" placeholder="10:00 AM - 08:00 PM" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM) - (1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM)" name="rdOpTime" size="23px" value="<?php echo $rdOpTime ?>"></td>
                 </tr>
                 <tr>
                     <td class="t-border th">Contact No</td>
@@ -91,7 +108,15 @@ $varietyType = $row['varietyType'];
             </table>
         </div>
         <br>
-            <input type="submit" value="Update" class="btn" style="left: 50%;">
+            <input type="hidden" name="RO_username" value="<?php echo $RO_username ?>">
+            <?php
+                if ($numRow > 0) {
+                    echo("<input type='submit' class='btn' style='left: 50%;' value='Update'>");
+                }
+                else {
+                    echo("<input type='submit' class='btn' style='left: 50%;' value='Add'>");
+                }
+            ?>
         </form>
     </div>
 

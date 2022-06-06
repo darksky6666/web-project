@@ -1,13 +1,18 @@
 <?php
 include './db/db.php';
 session_start();
-$_SESSION['RO_username']='RE10001';
+$_SESSION['RO_username']='RE10004';
 $RO_username=$_SESSION['RO_username'];
 
 $sqlrName="SELECT `rdName` FROM `restaurant_details` WHERE `RO_username`='$RO_username';";
 $resultrName=mysqli_query($con,$sqlrName) or die (mysqli_error());
 $rowrName=mysqli_fetch_assoc($resultrName);
 $rdName=$rowrName['rdName'];
+
+if ($rowrName == 0) {
+    echo "<script type = 'text/javascript'> alert('No Restaurant Details Found') </script>";
+    echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+}
 
 // Total Amount
 $sqlAmount="SELECT COUNT(`orderID`), WEEK(`orderDate`), SUM(`totalAmount`) FROM `order_list` WHERE `RO_username`='$RO_username' GROUP BY WEEK(`orderDate`) ORDER BY `orderDate` ASC;";
