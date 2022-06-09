@@ -32,7 +32,7 @@ include './db/validateRestaurant.php';
         function initialize() {
             // chartTotalAmount
             y_amount = <?php echo json_encode($totalAmount) ?>;
-            x_amount = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+            x_amount = <?php echo json_encode($week) ?>;
             chartTotalAmount();
             
             // chartTotalOrder
