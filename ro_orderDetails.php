@@ -1,6 +1,10 @@
 <?php
 session_start();
-$RO_username=$_SESSION['RO_username'];
+if (isset($_GET['roID'])) {
+    $RO_username = $_GET['roID'];
+} else {
+    $RO_username=$_SESSION['RO_username'];
+}
 $id = $_GET['orderID'];
 $length = 5;
 
@@ -102,9 +106,8 @@ $totalPrice=0;
             <div class="flex-item order-status">
                 <h4>Order Status: <span style="padding-left: 0.8em;"><?php echo $orderStatus ?></span></h4>
                 <br><br>
-                <!-- <input class="btn" type="button" name="status" value="Ordered" onclick="generateQR('<?php echo $id ?>', 'Ordered')"> -->
-                <input class="btn" type="button" name="status" value="Prepared" onclick="generateQR('<?php echo $id ?>', 'Prepared')">
-                <input class="btn" type="button" name="status" value="Cancel" onclick="generateQR('<?php echo $id ?>', 'Cancel')">
+                <input class="btn" type="button" name="status" value="Prepared" onclick="generateQR('<?php echo $id ?>', 'Prepared', '<?php echo $RO_username ?>')">
+                <input class="btn" type="button" name="status" value="Cancel" onclick="generateQR('<?php echo $id ?>', 'Cancel', '<?php echo $RO_username ?>')">
                 <br><br><br>
                 <div id="statusText"></div>
                 <br>

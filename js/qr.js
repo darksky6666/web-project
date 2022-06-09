@@ -1,4 +1,4 @@
-function generateQR(id, status) {
+function generateQR(id, status, roID) {
     const qrcode = document.getElementById("qrcode");
     const statusText = document.getElementById("statusText");
 
@@ -10,5 +10,5 @@ function generateQR(id, status) {
     const qr = new QRCode(qrcode);
 
     // Temp link
-    qr.makeCode(`http://127.0.0.1/project/db/updateOrderStatus.php?id=${id}&status=${status}`);
+    qr.makeCode(`http://127.0.0.1/project/db/updateOrderStatus.php?id=${id}&status=${status}&roID=${roID}`);
 }
