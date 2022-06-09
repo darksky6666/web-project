@@ -1,4 +1,6 @@
 <?php
+session_start();
+$RO_username=$_SESSION['RO_username'];
 include './db/db.php';
 $search = $_POST['search'];
 $sql = sprintf("SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID AND menu.foodName LIKE '%s%%' ORDER BY menu.menu_ID;", 
@@ -57,7 +59,7 @@ $rowcount=mysqli_num_rows($result);
             <table>
                 <tr>
                     <td rowspan=2 class="td-1">
-                        <img src="./resources/menu/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img src="./resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                     </td>
                     <td class="td-2">
                         <?php echo $foodName; ?>

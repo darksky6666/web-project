@@ -1,4 +1,6 @@
 <?php
+session_start();
+$RO_username=$_SESSION['RO_username'];
 include 'db.php';
 extract($_POST);
 
@@ -73,7 +75,7 @@ switch ($action) {
         print_r($_FILES['foodPhoto']['name']);
         if (isset( $_FILES['foodPhoto']['name'] ) && $_FILES['foodPhoto']['name'] != '' ) {
             // Delete the old photo
-            $loc="../resources/menu/$oldPhoto";
+            $loc="../resources/menu/$RO_username/$oldPhoto";
             if (is_file($loc)) {
                 // If Linux user, please uncomment the line below
                 // chmod($loc, 0777);
@@ -81,7 +83,7 @@ switch ($action) {
             }
             $imageName=$id . str_replace(" ", "-", strtolower("$foodName")). ".png";
             $sourcePath=$_FILES['foodPhoto']['tmp_name'];
-            $targetPath="../resources/menu/".$imageName;
+            $targetPath="../resources/menu/$RO_username/".$imageName;
             $upload=move_uploaded_file($sourcePath,$targetPath);
             $sql = sprintf("UPDATE `menu_list` SET `foodName`='%s',`foodPhoto`='%s',`foodDesc`='%s',`foodAvailability`='%s',`fc_ID`='%s' WHERE `menu_ID`=$id", 
                             mysqli_real_escape_string($con,$foodName),

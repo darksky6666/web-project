@@ -73,23 +73,23 @@ $varietyType = $row['varietyType'] ?? NULL;
             <table class="table-border">
                 <tr>
                     <td class="t-border th">Name</td>
-                    <td class="t-border col-20"><input type="text" name="rdName" size="23px" value="<?php echo $rdName ?>"></td>
+                    <td class="t-border col-20"><input type="text" required name="rdName" size="23px" value="<?php echo $rdName ?>"></td>
                 </tr>
                 <tr>
                     <td class="t-border th">Address</td>
-                    <td class="t-border col-20"><textarea name="rdLocation" cols="25" rows="5"><?php echo $rdLocation ?></textarea></td>
+                    <td class="t-border col-20"><textarea name="rdLocation"  required cols="25" rows="5"><?php echo $rdLocation ?></textarea></td>
                 </tr>
                 <tr>
                     <td class="t-border th">Operating Time</td>
-                    <td class="t-border col-20"><input type="text" placeholder="10:00 AM - 08:00 PM" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM) - (1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM)" name="rdOpTime" size="23px" value="<?php echo $rdOpTime ?>"></td>
+                    <td class="t-border col-20"><input type="text"  required placeholder="10:00 AM - 08:00 PM" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM) - (1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM)" name="rdOpTime" size="23px" value="<?php echo $rdOpTime ?>"></td>
                 </tr>
                 <tr>
                     <td class="t-border th">Contact No</td>
-                    <td class="t-border col-20"><input type="tel" placeholder="0123456789" pattern="[0-9]{2,3}-*[0-9]{7,8}" name="rdContactNo" size="23px" value="<?php echo $rdContactNo ?>"></td>
+                    <td class="t-border col-20"><input type="tel"  required placeholder="0123456789" pattern="[0-9]{2,3}-*[0-9]{7,8}" name="rdContactNo" size="23px" value="<?php echo $rdContactNo ?>"></td>
                 </tr>
                 <tr>
                     <td class="t-border th">Cuisine Type</td>
-                    <td class="t-border col-20"><select name="cuisinesType" style="width: 200px;">
+                    <td class="t-border col-20"><select name="cuisinesType" required style="width: 200px;">
                         <option <?=strpos($cuisinesType, "Rice Noodles") !== false?'selected="selected"':'';?> value="Rice Noodles">Rice Noodles</option>
                         <option <?=strpos($cuisinesType, "Malaysian Food") !== false?'selected="selected"':'';?> value="Malaysian Food">Malaysian Food</option>
                         <option <?=strpos($cuisinesType, "Western") !== false?'selected="selected"':'';?> value="Western">Western</option>
@@ -100,7 +100,7 @@ $varietyType = $row['varietyType'] ?? NULL;
                 </tr>
                 <tr>
                     <td class="t-border th">Variety Type</td>
-                    <td class="t-border col-20"><select name="varietyType" style="width: 200px;">
+                    <td class="t-border col-20"><select name="varietyType" required style="width: 200px;">
                         <option <?=strpos($varietyType, "Halal") !== false?'selected="selected"':'';?> value="Halal">Halal</option>
                         <option <?=strpos($varietyType, "Non-Halal") !== false?'selected="selected"':'';?> value="Non-Halal">Non-Halal</option>
                     </select></td>

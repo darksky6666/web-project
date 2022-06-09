@@ -12,6 +12,7 @@ session_start();
 $RO_username=$_SESSION['RO_username'];
 
 include './db/getInsight.php';
+include './db/validateRestaurant.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

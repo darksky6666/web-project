@@ -1,4 +1,6 @@
 <?php
+session_start();
+$RO_username=$_SESSION['RO_username'];
 $id = $_GET['orderID'];
 $length = 5;
 

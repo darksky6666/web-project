@@ -4,15 +4,17 @@ $id = $_GET['id'];
 $foodPhoto = $_GET['foodPhoto'];
 
 // Delete confirmation
-echo "<script src='../js/menu.js'></script>";
-echo "<script type = 'text/javascript'> deleteConfirmBox() </script>";
-
+// echo "<script src='../js/menu.js'></script>";
+// echo "<script type = 'text/javascript'> deleteConfirmBox(); </script>";
+// echo "<script type = 'text/javascript'> alert('debug'); </script>";
 $sql = "DELETE FROM `menu_list` WHERE `menu_ID`='$id'";
 
 $result = mysqli_query($con,$sql) or die(mysqli_error());
 $successMsg="Deleted Successfully";
 $failMsg="Failed to Delete";
-$loc="../resources/menu/$foodPhoto";
+session_start();
+$RO_username=$_SESSION['RO_username'];
+$loc="../resources/menu/$RO_username/$foodPhoto";
 
 if($result){
     // Delete the photo when sql query is successful

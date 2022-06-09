@@ -1,6 +1,15 @@
 <?php
+session_start();
+$RO_username=$_SESSION['RO_username'];
 // Set default display for img
 $foodPhoto="no-image.png";
+$testLoc="./resources/menu/$RO_username";
+
+// Create dir for restaurant owner if not exist
+if (!is_dir($testLoc)) {
+    mkdir($testLoc, '0777', true);
+    copy("./resources/menu/no-image.png", "./resources/menu/$RO_username/no-image.png");
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +52,7 @@ $foodPhoto="no-image.png";
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
                     <td>
-                        <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                         <br>
                         <br>
                         <input type="file" name="foodPhoto" id="foodPhoto" accept="image/png, image/jpeg" onchange="previewImg(this)">

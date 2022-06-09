@@ -1,4 +1,6 @@
 <?php
+session_start();
+$RO_username=$_SESSION['RO_username'];
 include './db/db.php';
 $id = $_GET['id'];
 $sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, menu.fc_ID, fc.categoryPrice, fc.categoryName, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.menu_ID=$id AND menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
@@ -55,7 +57,7 @@ $cPrice = $row['categoryPrice'];
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
                     <td>
-                        <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                         <br>
                         <br>
                         <input type="file" name="foodPhoto" id="foodPhoto" onchange="previewImg(this)">

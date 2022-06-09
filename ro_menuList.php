@@ -1,6 +1,9 @@
 <?php 
+session_start();
+$RO_username=$_SESSION['RO_username'];
 include './db/db.php'; 
-$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryName, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
+include './db/validateRestaurant.php';
+$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryName, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID AND menu.RO_username = '$RO_username' ORDER BY menu.menu_ID;";
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -77,7 +80,7 @@ $rowcount=mysqli_num_rows($result);
                 <span class="fCat" style="display: none;"><?php echo $categoryName ?></span>
                 <tr>
                     <td rowspan=2 class="td-1">
-                        <img src="./resources/menu/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img src="./resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                     </td>
                     <td class="td-2">
                         <?php echo $foodName; ?>
@@ -86,7 +89,7 @@ $rowcount=mysqli_num_rows($result);
                         <?php echo $foodAvailability; ?>
                     </td>
                     <td rowspan=2 class="td-3">
-                        <a href='ro_editMenuList.php?id=<?php echo $id ?>'>Edit</a> &nbsp <a href='./db/deletedb.php?id=<?php echo $id ?>&foodPhoto=<?php echo $foodPhoto ?>'>Delete</a>
+                        <a href='ro_editMenuList.php?id=<?php echo $id ?>'>Edit</a> &nbsp <a onclick='return deleteConfirmBox();' href='./db/deletedb.php?id=<?php echo $id ?>&foodPhoto=<?php echo $foodPhoto ?>'>Delete</a>
                     </td>
                 </tr>
                 <tr>

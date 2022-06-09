@@ -1,6 +1,9 @@
 <?php
+session_start();
+$RO_username=$_SESSION['RO_username'];
 include './db/db.php';
-$sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username ORDER BY ol.orderDate DESC";
+include './db/validateRestaurant.php';
+$sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username AND ol.RO_username='$RO_username' ORDER BY ol.orderDate DESC";
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -63,6 +66,9 @@ $rowcount=mysqli_num_rows($result);
                         echo "<td><a class='btn' href='ro_orderDetails.php?orderID=".$row['orderID']."'>Details</a></td>";
                         echo "</tr>";
                     }
+                }
+                else {
+                    echo "<tr><td colspan='7'>No Orders</td></tr>";
                 }
                 ?>
             </table>
