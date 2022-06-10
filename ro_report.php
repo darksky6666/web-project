@@ -244,7 +244,7 @@ include './db/validateRestaurant.php';
             <h3>Restaurant Owner Report</h3>
             <br>
             <form action="" method="post">
-                <input type="month" name="monthSelector" id="monthSelector" min="2022-01" value="2022-05">
+                <input type="month" name="monthSelector" id="monthSelector" min="2022-01" value="<?php echo $year.'-'.$month?>">
                 <input type="submit" name="submit" value="Generate">
             </form>
         </div>

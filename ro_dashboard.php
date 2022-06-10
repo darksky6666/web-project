@@ -19,8 +19,7 @@ $resultAmount=mysqli_query($con,$sqlAmount) or die(mysqli_error($con));
 
 $totalAmount=array();
 $week=array();
-$w=4;
-while ($w-- > 0 && $rowAmount=mysqli_fetch_array($resultAmount)) {
+while ($rowAmount=mysqli_fetch_array($resultAmount)) {
     array_push($totalAmount,$rowAmount['SUM(`totalAmount`)']);
     array_push($week,$rowAmount['WEEK(`orderDate`)']);
 }
@@ -312,7 +311,7 @@ while ($w-- > 0 && $rowAmount=mysqli_fetch_array($resultAmount)) {
                 <th>SOLD</th>
             </tr>
             <?php
-            $sqlPopular = "SELECT ml.menu_ID, ml.foodName, fc.categoryName, fc.categoryPrice, COUNT(od.menu_ID) FROM `order_details` od, `menu_list` ml, `order_list` ol, `food_categories` fc WHERE ol.orderID=od.orderID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.RO_username='$RO_username' GROUP BY od.menu_ID ORDER BY COUNT(od.menu_ID) DESC LIMIT 5;";
+            $sqlPopular = "SELECT ml.menu_ID, ml.foodName, fc.categoryName, fc.categoryPrice, SUM(od.`orderQuantity`) FROM `order_details` od, `menu_list` ml, `order_list` ol, `food_categories` fc WHERE ol.orderID=od.orderID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.RO_username='$RO_username' GROUP BY od.menu_ID ORDER BY SUM(od.`orderQuantity`) DESC LIMIT 5;";
             $resultPopular = mysqli_query($con, $sqlPopular);
             $countPopular = mysqli_num_rows($resultPopular);
             $rank = 1;
@@ -323,7 +322,7 @@ while ($w-- > 0 && $rowAmount=mysqli_fetch_array($resultAmount)) {
                     echo('<td>'.$rowPopular['foodName'].'</td>');
                     echo('<td>'.$rowPopular['categoryName'].'</td>');
                     echo('<td>RM '.number_format($rowPopular['categoryPrice'], 2).'</td>');
-                    echo('<td>'.$rowPopular['COUNT(od.menu_ID)'].'</td>');
+                    echo('<td>'.$rowPopular['SUM(od.`orderQuantity`)'].'</td>');
                     echo('</tr>');
                     ++$rank;
                 }
