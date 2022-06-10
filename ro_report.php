@@ -327,7 +327,7 @@ include './db/validateRestaurant.php';
                     </tr>
                     <tr>
                         <td>Profit:</td>
-                        <td>RM <span id="profit"></td>
+                        <td class="right-text">RM <span id="profit"></td>
                     </tr>
                 </table>
             </div>
