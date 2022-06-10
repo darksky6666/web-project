@@ -68,15 +68,15 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
                                     display: true,
                                     text: "Weeks",
                                 }
-                            }
-                        },
-                        y: {
+                            },
+                            y: {
                             display: true,
                             title: {
                                 display: true,
-                                text: "Total amount",
+                                text: "Total Amount",
                             }
-                        }
+                        },
+                        },
                     }
                 });
         }

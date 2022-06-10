@@ -137,16 +137,19 @@ include './db/validateRestaurant.php';
                         scales: {
                             x: {
                                 display: true,
-                                title: "Weeks",
-                            }
-                        },
+                                title: {
+                                    display: true,
+                                    text: "Weeks",
+                                }
+                            },
                             y: {
-                            // beginAtZero: true,
+                            display: true,
                             title: {
                                 display: true,
                                 text: "RM",
                             }
-                        }
+                        },
+                        },
                     }
                 });
         }
@@ -172,16 +175,19 @@ include './db/validateRestaurant.php';
                         scales: {
                             x: {
                                 display: true,
-                                title: "Date",
-                            }
-                        },
+                                title: {
+                                    display: true,
+                                    text: "Date",
+                                }
+                            },
                             y: {
-                            // beginAtZero: true,
+                            display: true,
                             title: {
                                 display: true,
                                 text: "No of orders",
                             }
-                        }
+                        },
+                        },
                     }
                 });
         }
@@ -207,16 +213,19 @@ include './db/validateRestaurant.php';
                         scales: {
                             x: {
                                 display: true,
-                                title: "Months",
-                            }
-                        },
+                                title: {
+                                    display: true,
+                                    text: "Weeks",
+                                }
+                            },
                             y: {
-                            // beginAtZero: true,
+                            display: true,
                             title: {
                                 display: true,
                                 text: "RM",
                             }
-                        }
+                        },
+                        },
                     }
                 });
         }
