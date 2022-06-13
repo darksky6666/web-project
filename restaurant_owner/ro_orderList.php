@@ -1,8 +1,8 @@
 <?php
 session_start();
 $RO_username=$_SESSION['RO_username'];
-include './db/db.php';
-include './db/validateRestaurant.php';
+include '../db/db.php';
+include '../db/validateRestaurant.php';
 $sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username AND ol.RO_username='$RO_username' ORDER BY ol.orderDate DESC";
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
@@ -14,17 +14,17 @@ $rowcount=mysqli_num_rows($result);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <link rel="icon" href="./resources/favicon.png">
-    <link rel="stylesheet" href="css/order.css">
-    <link rel="stylesheet" href="css/header_footer.css">
+    <link rel="icon" href="../resources/favicon.png">
+    <link rel="stylesheet" href="../css/order.css">
+    <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
     <header class="wrapper">
-        <img src="resources/umplogo.png" alt="UMP" width="5%">
-        <img src="resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/umplogo.png" alt="UMP" width="5%">
+        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
         <nav>
             <a href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
@@ -33,7 +33,7 @@ $rowcount=mysqli_num_rows($result);
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>

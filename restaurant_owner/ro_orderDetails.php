@@ -8,7 +8,7 @@ if (isset($_GET['roID'])) {
 $id = $_GET['orderID'];
 $length = 5;
 
-include './db/db.php';
+include '../db/db.php';
 $sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus, ml.foodName, od.orderQuantity, fc.categoryPrice FROM `order_list` `ol`, `order_details` `od`, `user`, `menu_list` `ml`, `food_categories` `fc` WHERE user.username=ol.username AND ol.orderID=od.orderID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.orderID=$id;";
 $result=mysqli_query($con,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
@@ -31,19 +31,19 @@ $totalPrice=0;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <link rel="icon" href="./resources/favicon.png">
-    <link rel="stylesheet" href="css/order.css">
-    <link rel="stylesheet" href="css/header_footer.css">
+    <link rel="icon" href="../resources/favicon.png">
+    <link rel="stylesheet" href="../css/order.css">
+    <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="./js/qr.js"></script>
+    <script src="../js/qr.js"></script>
 </head>
 
 <body>
     <header class="wrapper">
-        <img src="resources/umplogo.png" alt="UMP" width="5%">
-        <img src="resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/umplogo.png" alt="UMP" width="5%">
+        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
         <nav>
             <a href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
@@ -52,7 +52,7 @@ $totalPrice=0;
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>

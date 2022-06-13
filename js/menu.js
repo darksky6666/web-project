@@ -37,7 +37,7 @@ function filterCat(catName) {
 function deleteConfirmBox() {
     let deleteConfirm = confirm('Are you sure you want to remove this entry?\nThis process is not reversible.');
     if (deleteConfirm != true) {
-        window.location.href="./ro_menuList.php";
+        window.location.href="../restaurant_owner/ro_menuList.php";
         return false;
     }
     return true;

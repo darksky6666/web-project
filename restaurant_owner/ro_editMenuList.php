@@ -1,7 +1,7 @@
 <?php
 session_start();
 $RO_username=$_SESSION['RO_username'];
-include './db/db.php';
+include '../db/db.php';
 $id = $_GET['id'];
 $sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, menu.fc_ID, fc.categoryPrice, fc.categoryName, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.menu_ID=$id AND menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
 $result = mysqli_query($con, $sql) or die (mysqli_error());
@@ -23,18 +23,18 @@ $cPrice = $row['categoryPrice'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <link rel="icon" href="./resources/favicon.png">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/header_footer.css">
-    <script src="./js/menu.js"></script>
+    <link rel="icon" href="../resources/favicon.png">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/header_footer.css">
+    <script src="../js/menu.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
     <header class="wrapper">
-        <img src="resources/umplogo.png" alt="UMP" width="5%">
-        <img src="resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/umplogo.png" alt="UMP" width="5%">
+        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
         <nav>
             <a href="ro_dashboard.php">Dashboard</a>
             <a class="active" href="ro_menuList.php">Menu List</a>
@@ -43,7 +43,7 @@ $cPrice = $row['categoryPrice'];
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>
@@ -52,12 +52,12 @@ $cPrice = $row['categoryPrice'];
         <div class="item1">
         <h3>Update menu</h3>
         <br>
-        <form action="./db/updatedb.php?id=<?php echo $id; ?>&action=menu" method="POST" enctype="multipart/form-data">
+        <form action="../db/updatedb.php?id=<?php echo $id; ?>&action=menu" method="POST" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
                     <td>
-                        <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img id="image" style="padding-right: 10px;" src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                         <br>
                         <br>
                         <input type="file" name="foodPhoto" id="foodPhoto" onchange="previewImg(this)">
@@ -107,7 +107,7 @@ $cPrice = $row['categoryPrice'];
         <div class="item2">
             <h3>Category Price for <?php echo "$fcName" ?></h3>
             <br>
-            <form action="./db/updatedb.php?foodCat=<?php echo $foodCat; ?>&action=category" method="POST" enctype="multipart/form-data">
+            <form action="../db/updatedb.php?foodCat=<?php echo $foodCat; ?>&action=category" method="POST" enctype="multipart/form-data">
             <label for="catPrice-input">RM<input type="number" name="cPrice" id="catPrice-input" step="0.01" value="<?php printf("%.2f", $cPrice) ?>"></label>
             <input type="submit" value="Update" class="btn">
             </form>

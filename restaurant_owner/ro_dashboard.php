@@ -1,5 +1,5 @@
 <?php
-include './db/db.php';
+include '../db/db.php';
 session_start();
 $_SESSION['RO_username']='RE10001';
 $RO_username=$_SESSION['RO_username'];
@@ -9,7 +9,7 @@ $resultrName=mysqli_query($con,$sqlrName) or die (mysqli_error());
 $rowrName=mysqli_fetch_assoc($resultrName);
 if ($rowrName == 0) {
     echo "<script type = 'text/javascript'> alert('No Restaurant Details Found') </script>";
-    echo "<script type = 'text/javascript'> window.location='./ro_restaurantDetails.php' </script>";
+    echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_restaurantDetails.php' </script>";
 }
 $rdName=$rowrName['rdName'];
 
@@ -32,8 +32,8 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <link rel="icon" href="./resources/favicon.png">
-    <link rel="stylesheet" href="css/header_footer.css">
+    <link rel="icon" href="../resources/favicon.png">
+    <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
@@ -198,8 +198,8 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
 
 <body onload="initialize()">
     <header class="wrapper">
-        <img src="resources/umplogo.png" alt="UMP" width="5%">
-        <img src="resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/umplogo.png" alt="UMP" width="5%">
+        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
         <nav>
             <a class="active" href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
@@ -208,7 +208,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>

@@ -18,11 +18,11 @@ switch ($action) {
 
         if($result2){
             echo "<script type = 'text/javascript'> alert('$successMsg2') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_menuList.php' </script>";
         }
         else {
             echo "<script type = 'text/javascript'> alert('$failMsg2') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_menuList.php' </script>";
         }
         break;
     
@@ -41,11 +41,11 @@ switch ($action) {
 
         if($result){
             echo "<script type = 'text/javascript'> alert('Restaurant Details Updated Successfully') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_restaurantDetails.php' </script>";
         }
         else {
             echo "<script type = 'text/javascript'> alert('Failed to Update Restaurant Details') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_restaurantDetails.php' </script>";
         }
         break;
     
@@ -61,11 +61,11 @@ switch ($action) {
         $result=mysqli_query($con,$sql) or die(mysqli_error());
         if($result){
             echo "<script type = 'text/javascript'> alert('Restaurant Details Updated Successfully') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_restaurantDetails.php' </script>";
         }
         else {
             echo "<script type = 'text/javascript'> alert('Failed to Update Restaurant Details') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_restaurantDetails.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_restaurantDetails.php' </script>";
         }
         break;
 
@@ -106,11 +106,11 @@ switch ($action) {
 
         if($result){
             echo "<script type = 'text/javascript'> alert('$successMsg') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_menuList.php' </script>";
         }
         else {
             echo "<script type = 'text/javascript'> alert('$failMsg') </script>";
-            echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
+            echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_menuList.php' </script>";
         }
 }
 mysqli_close($con);

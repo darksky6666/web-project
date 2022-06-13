@@ -11,8 +11,8 @@ else {
 session_start();
 $RO_username=$_SESSION['RO_username'];
 
-include './db/getInsight.php';
-include './db/validateRestaurant.php';
+include '../db/getInsight.php';
+include '../db/validateRestaurant.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +21,9 @@ include './db/validateRestaurant.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <link rel="icon" href="./resources/favicon.png">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/header_footer.css">
+    <link rel="icon" href="../resources/favicon.png">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
@@ -233,8 +233,8 @@ include './db/validateRestaurant.php';
 </head>
 <body onload="initialize()">
     <header class="wrapper">
-        <img src="resources/umplogo.png" alt="UMP" width="5%">
-        <img src="resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/umplogo.png" alt="UMP" width="5%">
+        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
         <nav>
             <a href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>

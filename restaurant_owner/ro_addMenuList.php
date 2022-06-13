@@ -3,12 +3,12 @@ session_start();
 $RO_username=$_SESSION['RO_username'];
 // Set default display for img
 $foodPhoto="no-image.png";
-$testLoc="./resources/menu/$RO_username";
+$testLoc="../resources/menu/$RO_username";
 
 // Create dir for restaurant owner if not exist
 if (!is_dir($testLoc)) {
     mkdir($testLoc, '0777', true);
-    copy("./resources/menu/no-image.png", "./resources/menu/$RO_username/no-image.png");
+    copy("../resources/menu/no-image.png", "./resources/menu/$RO_username/no-image.png");
 }
 ?>
 
@@ -19,7 +19,7 @@ if (!is_dir($testLoc)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
-    <script src="./js/menu.js"></script>
+    <script src="../js/menu.js"></script>
     <link rel="icon" href="./resources/favicon.png">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/header_footer.css">
@@ -39,7 +39,7 @@ if (!is_dir($testLoc)) {
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>
@@ -47,12 +47,12 @@ if (!is_dir($testLoc)) {
     <div class="wrapper">
         <h3>Add new menu</h3>
         <br>
-        <form action="./db/insertdb.php" name="addForm" method="POST" enctype="multipart/form-data" onsubmit="return checkData()">
+        <form action="../db/insertdb.php" name="addForm" method="POST" enctype="multipart/form-data" onsubmit="return checkData()">
             <table>
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
                     <td>
-                        <img id="image" style="padding-right: 10px;" src="./resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img id="image" style="padding-right: 10px;" src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                         <br>
                         <br>
                         <input type="file" name="foodPhoto" id="foodPhoto" accept="image/png, image/jpeg" onchange="previewImg(this)">
