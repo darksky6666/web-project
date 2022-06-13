@@ -15,7 +15,7 @@ if (isset($_FILES['foodPhoto']['name']) && $_FILES['foodPhoto']['name'] != '') {
 
     if ($upload==false) {
         echo "<script type = 'text/javascript'> alert('Upload failed') </script>";
-        echo "<script type = 'text/javascript'> window.location='../ro_menuList.php' </script>";
+        echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_menuList.php' </script>";
         die();
     }
 } 
