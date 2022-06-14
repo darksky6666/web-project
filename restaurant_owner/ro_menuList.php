@@ -3,8 +3,8 @@ session_start();
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php'; 
 include '../db/validateRestaurant.php';
-$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryName, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID AND menu.RO_username = '$RO_username' ORDER BY menu.menu_ID;";
-$result=mysqli_query($con,$sql) or die (mysqli_error());
+$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryName, fc.categoryPrice, rd.RO_username FROM `menu_list` `menu`, `food_categories` `fc`, `res_details` rd WHERE menu.fc_ID = fc.fc_ID AND menu.rd_ID = rd.rd_ID AND rd.RO_username = '$RO_username' ORDER BY menu.menu_ID;";
+$result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
 
@@ -46,7 +46,7 @@ $rowcount=mysqli_num_rows($result);
             Filter: <input type='button' class='btn' value='All' onclick="filterCat(this.value)">
             <?php 
             $sql2 = "SELECT * FROM `food_categories` ORDER BY `categoryName`;";
-            $result2=mysqli_query($con,$sql2) or die (mysqli_error());
+            $result2=mysqli_query($conn,$sql2) or die (mysqli_error());
             while ($row2=mysqli_fetch_assoc($result2)) {
                 $fCat = $row2['categoryName'];
                 echo("<input type='button' class='btn' value='$fCat' onclick='filterCat(this.value)'>");

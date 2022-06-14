@@ -4,7 +4,7 @@ $RO_username=$_SESSION['RO_username'];
 include 'db.php';
 extract($_POST);
 $sql="SELECT * FROM `menu_list`";
-$result=mysqli_query($con,$sql) or die (mysqli_error());
+$result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 
 if (isset($_FILES['foodPhoto']['name']) && $_FILES['foodPhoto']['name'] != '') {
@@ -23,16 +23,20 @@ else {
     $imageName="";
 }
 
-$sql = sprintf("INSERT INTO `menu_list`(`foodName`, `foodPhoto`, `foodDesc`, `foodAvailability`, `fc_ID`, `RO_username`) VALUES ('%s','%s','%s','%s','%s', '%s')", 
-                mysqli_real_escape_string($con,$foodName),
-                mysqli_real_escape_string($con,$imageName),
-                mysqli_real_escape_string($con,$foodDesc),
-                mysqli_real_escape_string($con,$foodAvail),
-                mysqli_real_escape_string($con,$foodCat),
-                mysqli_real_escape_string($con,$RO_username));
+$resultrdID = mysqli_query($conn, "SELECT `rd_ID` FROM `res_details` WHERE `RO_username`='$RO_username'") or die(mysqli_error());
+$rowrdID=mysqli_fetch_assoc($resultrdID);
+$rd_ID = $rowrdID['rd_ID'];
+
+$sql = sprintf("INSERT INTO `menu_list`(`foodName`, `foodPhoto`, `foodDesc`, `foodAvailability`, `fc_ID`, `rd_ID`) VALUES ('%s','%s','%s','%s','%s', '%s')", 
+                mysqli_real_escape_string($conn,$foodName),
+                mysqli_real_escape_string($conn,$imageName),
+                mysqli_real_escape_string($conn,$foodDesc),
+                mysqli_real_escape_string($conn,$foodAvail),
+                mysqli_real_escape_string($conn,$foodCat),
+                mysqli_real_escape_string($conn,$rd_ID));
 $successMsg="Inserted Successfully";
 $failMsg="Failed to Insert";
-$result = mysqli_query($con,$sql) or die(mysqli_error());
+$result = mysqli_query($conn,$sql) or die(mysqli_error());
 
 
 

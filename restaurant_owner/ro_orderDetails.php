@@ -1,16 +1,12 @@
 <?php
 session_start();
-if (isset($_GET['roID'])) {
-    $RO_username = $_GET['roID'];
-} else {
-    $RO_username=$_SESSION['RO_username'];
-}
+$RO_username=$_SESSION['RO_username'];
 $id = $_GET['orderID'];
 $length = 5;
 
 include '../db/db.php';
-$sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus, ml.foodName, od.orderQuantity, fc.categoryPrice FROM `order_list` `ol`, `order_details` `od`, `user`, `menu_list` `ml`, `food_categories` `fc` WHERE user.username=ol.username AND ol.orderID=od.orderID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.orderID=$id;";
-$result=mysqli_query($con,$sql) or die (mysqli_error());
+$sql="SELECT ol.order_ID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus, ml.foodName, od.orderQuantity, fc.categoryPrice FROM `order_list` `ol`, `order_details` `od`, `user`, `menu_list` `ml`, `food_categories` `fc` WHERE user.username=ol.username AND ol.order_ID=od.order_ID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.order_ID=$id;";
+$result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 if ($rowcount==0) {
     echo("<script>alert('No order found!');</script>");
@@ -140,5 +136,5 @@ $totalPrice=0;
 </body>
 </html>
 <?php
-mysqli_close($con);
+mysqli_close($conn);
 ?>

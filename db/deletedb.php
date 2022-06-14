@@ -9,7 +9,7 @@ $foodPhoto = $_GET['foodPhoto'];
 // echo "<script type = 'text/javascript'> alert('debug'); </script>";
 $sql = "DELETE FROM `menu_list` WHERE `menu_ID`='$id'";
 
-$result = mysqli_query($con,$sql) or die(mysqli_error());
+$result = mysqli_query($conn,$sql) or die(mysqli_error());
 $successMsg="Deleted Successfully";
 $failMsg="Failed to Delete";
 session_start();

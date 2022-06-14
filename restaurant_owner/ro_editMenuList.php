@@ -3,8 +3,8 @@ session_start();
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php';
 $id = $_GET['id'];
-$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, menu.fc_ID, fc.categoryPrice, fc.categoryName, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.menu_ID=$id AND menu.fc_ID = fc.fc_ID ORDER BY menu.menu_ID;";
-$result = mysqli_query($con, $sql) or die (mysqli_error());
+$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, menu.fc_ID, fc.categoryPrice, fc.categoryName, rd.RO_username FROM `menu_list` `menu`, `food_categories` `fc`, `res_details` rd WHERE menu.menu_ID=$id AND menu.fc_ID = fc.fc_ID AND menu.rd_ID = rd.rd_ID ORDER BY menu.menu_ID;";
+$result = mysqli_query($conn, $sql) or die (mysqli_error());
 $row = mysqli_fetch_array($result);
 
 $foodName = $row['foodName'];

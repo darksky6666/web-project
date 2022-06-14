@@ -3,8 +3,8 @@ session_start();
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php';
 include '../db/validateRestaurant.php';
-$sql="SELECT ol.orderID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username AND ol.RO_username='$RO_username' ORDER BY ol.orderDate DESC";
-$result=mysqli_query($con,$sql) or die (mysqli_error());
+$sql="SELECT ol.order_ID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username AND ol.RO_username='$RO_username' ORDER BY ol.orderDate DESC";
+$result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
 <!DOCTYPE html>
@@ -63,7 +63,7 @@ $rowcount=mysqli_num_rows($result);
                         echo "<td>".$row['orderDate']."</td>";
                         echo "<td>".$row['orderTime']."</td>";
                         echo "<td>".$row['orderStatus']."</td>";
-                        echo "<td><a class='btn' href='ro_orderDetails.php?orderID=".$row['orderID']."'>Details</a></td>";
+                        echo "<td><a class='btn' href='ro_orderDetails.php?orderID=".$row['order_ID']."'>Details</a></td>";
                         echo "</tr>";
                     }
                 }
@@ -93,5 +93,5 @@ $rowcount=mysqli_num_rows($result);
 </body>
 </html>
 <?php
-mysqli_close($con);
+mysqli_close($conn);
 ?>

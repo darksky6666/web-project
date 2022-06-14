@@ -8,7 +8,7 @@ $testLoc="../resources/menu/$RO_username";
 // Create dir for restaurant owner if not exist
 if (!is_dir($testLoc)) {
     mkdir($testLoc, '0777', true);
-    copy("../resources/menu/no-image.png", "./resources/menu/$RO_username/no-image.png");
+    copy("../resources/menu/no-image.png", "../resources/menu/$RO_username/no-image.png");
 }
 ?>
 

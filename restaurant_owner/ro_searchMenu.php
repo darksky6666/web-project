@@ -3,9 +3,9 @@ session_start();
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php';
 $search = $_POST['search'];
-$sql = sprintf("SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, menu.RO_username FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID AND menu.foodName LIKE '%s%%' ORDER BY menu.menu_ID;", 
-                mysqli_real_escape_string($con,$search) );
-$result=mysqli_query($con,$sql) or die (mysqli_error());
+$sql = sprintf("SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, rd.RO_username FROM `menu_list` `menu`, `food_categories` `fc`, `res_details` rd WHERE menu.fc_ID = fc.fc_ID AND menu.rd_ID = rd.rd_ID AND menu.foodName LIKE '%s%%' ORDER BY menu.menu_ID;", 
+                mysqli_real_escape_string($conn,$search) );
+$result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
 

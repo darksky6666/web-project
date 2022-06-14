@@ -3,8 +3,16 @@ include '../db/db.php';
 session_start();
 $RO_username=$_SESSION['RO_username'];
 
-$sql="SELECT * FROM `restaurant_details` WHERE RO_username='$RO_username';";
-$result = mysqli_query($con, $sql) or die (mysqli_error());
+$testLoc="../resources/restaurant/$RO_username";
+
+// Create dir for restaurant owner if not exist
+if (!is_dir($testLoc)) {
+    mkdir($testLoc, '0777', true);
+    copy("../resources/restaurant/no-image.png", "../resources/restaurant/$RO_username/no-image.png");
+}
+
+$sql="SELECT * FROM `res_details` WHERE RO_username='$RO_username';";
+$result = mysqli_query($conn, $sql) or die (mysqli_error());
 $row = mysqli_fetch_array($result);
 $numRow = mysqli_num_rows($result);
 
@@ -16,7 +24,7 @@ $rdOpTime = $row['rdOpTime'] ?? NULL;
 $rdContactNo = $row['rdContactNo'] ?? NULL;
 $cuisinesType = $row['cuisinesType'] ?? NULL;
 $varietyType = $row['varietyType'] ?? NULL;
-
+$rdPhoto = $row['rdPhoto'] ?? "no-image.png";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +34,7 @@ $varietyType = $row['varietyType'] ?? NULL;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foody</title>
     <link rel="icon" href="../resources/favicon.png">
+    <script src="../js/menu.js"></script>
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -39,7 +48,7 @@ $varietyType = $row['varietyType'] ?? NULL;
         <nav>
             <a href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
-            <a class="active" href="ro_restaurantDetails">Restaurant Details</a>
+            <a class="active" href="ro_restaurantDetails.php">Restaurant Details</a>
             <a href="ro_orderList.php">Order List</a>
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
@@ -62,10 +71,10 @@ $varietyType = $row['varietyType'] ?? NULL;
         <br>
         <?php
             if ($numRow > 0) {
-                echo("<form action='../db/updatedb.php?id=$id&action=rDetails' method='post'>");
+                echo("<form action='../db/updatedb.php?id=$id&action=rDetails' name='resForm' method='post' enctype='multipart/form-data'>");
             }
             else {
-                echo("<form action='../db/updatedb.php?action=rDetailsAdd' method='post'>");
+                echo("<form action='../db/updatedb.php?action=rDetailsAdd' name='resForm' method='post' enctype='multipart/form-data'>");
             }
         ?>
         
@@ -73,19 +82,27 @@ $varietyType = $row['varietyType'] ?? NULL;
             <table class="table-border">
                 <tr>
                     <td class="t-border th">Name</td>
-                    <td class="t-border col-20"><input type="text" required name="rdName" size="23px" value="<?php echo $rdName ?>"></td>
+                    <td class="t-border col-20"><input type="text" required name="rdName" size="23px" value="<?php echo $rdName ?>">
+                    <span class="error">*</span>
+                </td>
                 </tr>
                 <tr>
                     <td class="t-border th">Address</td>
-                    <td class="t-border col-20"><textarea name="rdLocation"  required cols="25" rows="5"><?php echo $rdLocation ?></textarea></td>
+                    <td class="t-border col-20"><textarea name="rdLocation"  required cols="25" rows="5"><?php echo $rdLocation ?></textarea>
+                    <span class="error">*</span>
+                </td>
                 </tr>
                 <tr>
                     <td class="t-border th">Operating Time</td>
-                    <td class="t-border col-20"><input type="text"  required placeholder="10:00 AM - 08:00 PM" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM) - (1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM)" name="rdOpTime" size="23px" value="<?php echo $rdOpTime ?>"></td>
+                    <td class="t-border col-20"><input type="text"  required placeholder="10:00 AM - 08:00 PM" pattern="(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM) - (1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(AM|PM)" name="rdOpTime" size="23px" value="<?php echo $rdOpTime ?>">
+                    <span class="error">*</span>
+                </td>
                 </tr>
                 <tr>
                     <td class="t-border th">Contact No</td>
-                    <td class="t-border col-20"><input type="tel"  required placeholder="0123456789" pattern="[0-9]{2,3}-*[0-9]{7,8}" name="rdContactNo" size="23px" value="<?php echo $rdContactNo ?>"></td>
+                    <td class="t-border col-20"><input type="tel"  required placeholder="0123456789" pattern="[0-9]{2,3}-*[0-9]{7,8}" name="rdContactNo" size="23px" value="<?php echo $rdContactNo ?>">
+                    <span class="error">*</span>
+                </td>
                 </tr>
                 <tr>
                     <td class="t-border th">Cuisine Type</td>
@@ -96,21 +113,41 @@ $varietyType = $row['varietyType'] ?? NULL;
                         <option <?=strpos($cuisinesType, "Thai") !== false?'selected="selected"':'';?> value="Thai">Thai</option>
                         <option <?=strpos($cuisinesType, "Beverages") !== false?'selected="selected"':'';?> value="Beverages">Beverages</option>
                         <option <?=strpos($cuisinesType, "Fast Food") !== false?'selected="selected"':'';?> value="Fast Food">Fast Food</option>
-                    </select></td>
+                    </select>
+                    <span class="error">*</span>
+                </td>
                 </tr>
                 <tr>
                     <td class="t-border th">Variety Type</td>
                     <td class="t-border col-20"><select name="varietyType" required style="width: 200px;">
                         <option <?=strpos($varietyType, "Halal") !== false?'selected="selected"':'';?> value="Halal">Halal</option>
                         <option <?=strpos($varietyType, "Non-Halal") !== false?'selected="selected"':'';?> value="Non-Halal">Non-Halal</option>
-                    </select></td>
+                    </select>
+                    <span class="error">*</span>
+                </td>
+                </tr>
+                <tr>
+                    <td class="t-border th">Photo</td>
+                    <td class="t-border col-20">
+                        <img id="image" style="padding-right: 10px; object-fit: fill; width: 70%" src="../resources/restaurant/<?php echo $RO_username ?>/<?php echo $rdPhoto; ?>" alt="<?php echo $rdPhoto; ?>">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <input style="float: left;" type="file" name="rdPhoto" id="rdPhoto" accept="image/png, image/jpeg" onchange="previewImg(this)">
+                        <br>
+                    </td>
                 </tr>
             </table>
         </div>
         <br>
+        <br>
             <input type="hidden" name="RO_username" value="<?php echo $RO_username ?>">
             <?php
                 if ($numRow > 0) {
+            ?>
+                    <input type="hidden" name="oldPhoto" value="<?php echo $rdPhoto ?>">
+            <?php
                     echo("<input type='submit' class='btn' style='left: 50%;' value='Update'>");
                 }
                 else {

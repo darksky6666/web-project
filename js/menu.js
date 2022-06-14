@@ -3,13 +3,25 @@ function previewImg(e) {
 }
 
 function checkData() {
-    let foodPhoto = document.forms["addForm"]["foodPhoto"].value;
-    
-    if (foodPhoto == null | foodPhoto == "") {
-        document.getElementById("picErr").innerHTML = "* Please select a photo.";
-        return false;
+    if (typeof foodPhoto !== 'undefined') {
+        let foodPhoto = document.forms["addForm"]["foodPhoto"].value;
+        if (foodPhoto == null | foodPhoto == "") {
+            document.getElementById("picErr").innerHTML = "* Please select a photo.";
+            return false;
+        }
+        return true;
+
+    } else if (typeof rdPhoto !== 'undefined') {
+        let rdPhoto = document.forms["resForm"]["rdPhoto"].value;
+        if (rdPhoto == null | rdPhoto == "") {
+            document.getElementById("picErr").innerHTML = "* Please select a photo.";
+            return false;
+        }
+        return true;
+
+    } else {
+        return true;
     }
-    return true;
 }
 
 function filterCat(catName) {
