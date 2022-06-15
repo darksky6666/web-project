@@ -50,7 +50,8 @@ $totalPrice=0;
             <a href="ro_restaurantDetails.php">Restaurant Details</a>
             <a class="active" href="ro_orderList.php">Order List</a>
             <a href="ro_report.php">Restaurant Report</a>
-            <a href="../manage_user/logout.php">Logout</a>
+            <script src="../js/logout.js"></script>
+            <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
         <img src="../resources/../resources/profile.jpg" alt="profile" width="5%">
         <br>
