@@ -1,8 +1,15 @@
+<?php
+session_start();
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin View Complaint List</title>  
-
+    <link rel="icon" href="../resources/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -126,7 +133,8 @@ function checklogout(){
         <a href="../manage_user/userReport.php">User Report</a> 
         <a class="active" href="../complaint/IndexAdminViewComplaint.php">Complaint List</a>
         <a href="../complaint/complaintReport.php">Complaint Report</a>
-        <a href="logout.php" onclick="return checklogout()">Logout</a>
+        <script src="../js/logout.js"></script>
+        <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
         <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
@@ -146,7 +154,6 @@ function checklogout(){
 
 <?php
 include("../db/db.php");
-
 if(isset($_POST['searchComplaint']))
 {
     $printStart=$_POST['start'];
