@@ -37,6 +37,7 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['genUser']))
                     exit();
                 }
                 elseif($genUser=="General User"){
+                    $_SESSION['username']=$uname;
                     header("Location: ../general_user/resList.php");
                     exit();
                 }

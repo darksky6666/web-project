@@ -134,13 +134,14 @@ if (empty($_SESSION['logged_in'])) {
         <img src="../resources/ump logo.png" alt="UMP" width="100" height="100">
         <img src="../resources/foody logo.png" alt="Foody" width="100" height="100">
         <nav>
-        <a class="active" href="index.php">Delivery Note</a> 
+        <a class="active" href="index.php">Pending Order</a> 
+        <a href="acceptedOrder.php">Accepted Order</a> 
         <a href="deliveryRecord.php">Delivery Record</a> 
         <a href="riderReport.php">Rider Report</a>
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -158,11 +159,14 @@ include("../db/db.php");
 
 
 
-$query = "SELECT o.order_ID, o.orderDate, o.orderTime, o.orderStatus, u.name FROM order_list AS o, user AS u WHERE o.username = u.username AND o.rider_username IS NULL ORDER BY o.order_ID;";
+$query = "SELECT o.order_ID, o.orderDate, o.orderTime, o.orderStatus, u.name, r.rdName, r.rdLocation 
+FROM order_list AS o, user AS u, res_details AS r 
+WHERE o.username = u.username AND o.rd_ID = r.rd_ID 
+AND o.rider_username IS NULL AND o.orderStatus = 'Prepared' ORDER BY o.order_ID;";
 $result = mysqli_query($conn,$query);
 echo "<table>";
         echo "<tr>" . "<th>Order ID</th>" . "<th>Customer Name</th>" .
-        "<th>Order Date</th>" . "<th>Order Time</th>" ."<th>Order Status</th>" ."<th>Rider Action</th>".  "</tr>";
+        "<th>Order Date</th>" . "<th>Order Time</th>" ."<th>Order Status</th>" ."<th>Restaurant Name</th>" ."<th>Restaurant Location</th>" ."<th>Rider Action</th>".  "</tr>";
 if (mysqli_num_rows($result) > 0){
     // output data of each row
     while($row = mysqli_fetch_assoc($result)){
@@ -171,6 +175,8 @@ if (mysqli_num_rows($result) > 0){
       $orderDate = $row["orderDate"];
       $orderTime = $row["orderTime"];
       $orderStatus = $row["orderStatus"];
+      $rdName = $row["rdName"];
+      $rdLocation = $row["rdLocation"];
       $length = 5;
       $string = substr(str_repeat(0, $length).$id,-$length);
 	 
@@ -179,10 +185,9 @@ if (mysqli_num_rows($result) > 0){
                 $row['name'] . "</td><td>" .
                 $row['orderDate'] . "</td><td>" .
                 $row['orderTime'] . "</td><td>" .
-                $row['orderStatus'] . "</td><td>" .
-                "<a href='deliveryNote.php?id=$id'>" .
-                '<button style="margin-left:10%; "type="submit" name="view">View Order Details</button>' .
-                '</a>' .
+                $row['orderStatus'] . "</td><td>" . 
+                $row['rdName'] . "</td><td>" .
+                $row['rdLocation'] . "</td><td>" . 
                 "<a href='setRider.php?id=$id'>" .
                 '<button style="margin-left:10%; "type="submit" name="accept">Accept Order</button>' .
                 '</a>' .

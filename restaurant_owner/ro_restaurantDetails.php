@@ -43,6 +43,7 @@ $rdPhoto = $row['rdPhoto'] ?? "no-image.png";
     <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://app.simplefileupload.com/buckets/c25e29925df7c5eb1b395046b983a1e4.js"></script>
 </head>
 
 <body>
@@ -134,12 +135,12 @@ $rdPhoto = $row['rdPhoto'] ?? "no-image.png";
                 <tr>
                     <td class="t-border th">Photo</td>
                     <td class="t-border col-20">
-                        <img id="image" style="padding-right: 10px; object-fit: fill; width: 70%" src="../resources/restaurant/<?php echo $RO_username ?>/<?php echo $rdPhoto; ?>" alt="<?php echo $rdPhoto; ?>">
+                        <img id="image" style="padding-right: 10px; object-fit: fill; width: 70%" src="<?php echo $rdPhoto; ?>" alt="<?php echo $rdPhoto; ?>">
                         <br>
                         <br>
                         <br>
                         <br>
-                        <input style="float: left;" type="file" name="rdPhoto" id="rdPhoto" accept="image/png, image/jpeg" onchange="previewImg(this)">
+                        <input class="simple-file-upload" data-accepted="image/png, image/jpeg" type="hidden" name="rdPhoto" id="rdPhoto">
                         <br>
                     </td>
                 </tr>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2022 at 09:52 AM
+-- Generation Time: Jun 16, 2022 at 01:32 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.1.5
 
@@ -36,9 +36,10 @@ CREATE TABLE `complaint_list` (
 --
 
 INSERT INTO `complaint_list` (`complaint_ID`, `complaintType`, `complaintDesc`, `complaintDate`, `complaintTime`, `complaintStatus`, `order_ID`) VALUES
-(12, 'DAMAGED FOOD', 'lol', '2022-06-15', '02:06:15', 'IN INVESTIGATION', 1),
-(13, 'LATE DELIVERY', 'hoho', '2022-06-15', '02:12:20', 'IN INVESTIGATION', 3),
-(15, 'DAMAGED FOOD', 'll', '2022-06-15', '15:39:40', 'IN INVESTIGATION', 5);
+(23, 'LATE DELIVERY', 'late for 20 minutes', '2022-06-16', '15:54:37', 'IN INVESTIGATION', 16),
+(24, 'BAD ATTITUDE', 'did not smile', '2022-06-16', '15:56:45', 'IN INVESTIGATION', 17),
+(25, 'DAMAGED FOOD', 'soup spilt', '2022-06-16', '16:01:19', 'IN INVESTIGATION', 18),
+(26, 'BAD ATTITUDE', 'very bad', '2022-06-16', '17:44:26', 'IN INVESTIGATION', 19);
 
 -- --------------------------------------------------------
 
@@ -114,9 +115,12 @@ CREATE TABLE `menu_list` (
 --
 
 INSERT INTO `menu_list` (`menu_ID`, `foodName`, `foodPhoto`, `foodDesc`, `foodAvailability`, `fc_ID`, `rd_ID`) VALUES
+(1, 'Chicken Chop', '3-chicken-chop.png', 'A pan-fried chicken covered with bold black pepper sauce plus Australian fries.', 'Available', 1, 2),
 (2, 'Nasi Goreng Pattaya', '1-nasi-goreng-pattaya.png', 'A fried rice dish made by wrapping chicken fried rice in omelette.', 'Available', 5, 2),
 (3, 'Milo Dinasour', '2-milo-dinasour.png', 'A cup of iced Milo (a chocolate malt beverage) with undissolved Milo powder added on top of it.', 'Available', 6, 2),
-(4, 'Chicken Chop', '3-chicken-chop.png', 'A pan-fried chicken covered with bold black pepper sauce plus Australian fries.', 'Available', 1, 2);
+(5, 'Nasi Goreng Cina', '4-nasi-goreng-cina.png', 'Fried rice with fresh chicken.', 'Available', 5, 1),
+(6, 'Mocha Ice Blended', '5-mocha-ice-blended.png', 'A mocha drink blended with ice and topped with whipped cream.', 'Available', 6, 1),
+(7, 'Korean Fried Chicken', '6-korean-fried-chicken.png', 'A recipe that yields crispy fried chicken in spicy, savory and sweet Gochujang sauce.', 'Available', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -129,20 +133,19 @@ CREATE TABLE `order_details` (
   `orderQuantity` int DEFAULT NULL,
   `menu_ID` int DEFAULT NULL,
   `order_ID` int DEFAULT NULL,
-  `totalPrice` float NOT NULL
+  `totalPrice` float NOT NULL,
+  `username` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details` (`od_ID`, `orderQuantity`, `menu_ID`, `order_ID`, `totalPrice`) VALUES
-(1, 1, 2, 1, 7),
-(2, 1, 3, 1, 8),
-(3, 1, 4, 3, 10),
-(4, 1, 2, 3, 7),
-(5, 1, 2, 1, 7),
-(6, 1, 2, 5, 7);
+INSERT INTO `order_details` (`od_ID`, `orderQuantity`, `menu_ID`, `order_ID`, `totalPrice`, `username`) VALUES
+(28, 1, 5, 16, 7, 'SD10001'),
+(29, 1, 1, 17, 10, 'SD10001'),
+(30, 1, 6, 18, 8, 'ST10004'),
+(31, 1, 2, 19, 7, 'ST10004');
 
 -- --------------------------------------------------------
 
@@ -157,21 +160,20 @@ CREATE TABLE `order_list` (
   `totalPayment` float DEFAULT NULL,
   `orderStatus` varchar(100) DEFAULT NULL,
   `delLocation` varchar(100) DEFAULT NULL,
-  `RO_username` varchar(100) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
-  `rider_username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `rider_username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `rd_ID` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `order_list`
 --
 
-INSERT INTO `order_list` (`order_ID`, `orderDate`, `orderTime`, `totalPayment`, `orderStatus`, `delLocation`, `RO_username`, `username`, `rider_username`) VALUES
-(1, '2022-06-15', '12:29:21', 22, 'Ordered', 'ds', NULL, NULL, NULL),
-(2, '2022-06-15', '14:00:09', NULL, 'Incomplete', NULL, NULL, NULL, NULL),
-(3, '2022-06-15', '14:04:59', 17, 'Ordered', 'ds', NULL, NULL, 'RU10001'),
-(4, '2022-06-15', '15:37:10', NULL, 'Incomplete', NULL, NULL, NULL, NULL),
-(5, '2022-06-15', '15:39:22', 7, 'Ordered', 'ds', NULL, NULL, NULL);
+INSERT INTO `order_list` (`order_ID`, `orderDate`, `orderTime`, `totalPayment`, `orderStatus`, `delLocation`, `username`, `rider_username`, `rd_ID`) VALUES
+(16, '2022-06-16', '15:52:06', 7, 'Ordered', '456, Jalan Kenanga, Taman Kenanga.', 'SD10001', 'RU10001', 1),
+(17, '2022-06-16', '15:55:16', 10, 'Ordered', '89, Jalan Hero, Taman Hero.', 'SD10001', NULL, 2),
+(18, '2022-06-16', '15:58:40', 8, 'Ordered', '45, Jalan Boom, Taman Boom', 'ST10004', NULL, 1),
+(19, '2022-06-16', '17:42:51', 7, 'Ordered', '34, Jalan Aman Jaya, Taman', 'ST10004', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -196,7 +198,8 @@ CREATE TABLE `res_details` (
 --
 
 INSERT INTO `res_details` (`rd_ID`, `rdName`, `rdLocation`, `rdOpTime`, `rdContactNo`, `cuisinesType`, `varietyType`, `rdPhoto`, `RO_username`) VALUES
-(2, 'Sri Pekan Chinese Food', '26, Jalan Tengku Arif Bendahara, 26600 Pekan, Pahang', '10:00 AM - 08:00 PM', '0129893560', 'Rice Noodles', 'Non-Halal', '1-sri-pekan-chinese-food.png', 'RE10002');
+(1, 'AFOUR CAFE (A4 CAFE)', 'Lot 1,Jalan Satria,26600, 26600 Pekan, Pahang.', '04:00 PM - 11:00 PM', '01116996977', 'Malaysian Food', 'Halal', '2-afour-cafe-(a4-cafe).png', 'RE10002'),
+(2, 'Sri Pekan Chinese Food', '26, Jalan Tengku Arif Bendahara, 26600 Pekan, Pahang', '10:00 AM - 08:00 PM', '0129893560', 'Rice Noodles', 'Non-Halal', '1-sri-pekan-chinese-food.png', 'RE10001');
 
 -- --------------------------------------------------------
 
@@ -224,8 +227,11 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `name`, `address`, `regio
 (1, 'AM10001', 'ehf234#', 'Iskandar bin Shah', 'No 27, Jalan Bunga Melati, Taman Harmoni, Pekan Pahang.', 'Pekan', '0130924843', 'iskandar@gmail.com', 'Admin'),
 (2, 'SD10001', 'wjy322@', 'Wang Yi Bo', 'Residen Pelajar 5, Blok A, Universiti Malaysia Pahang, Kampus Pekan.', 'Pekan', '0195110297', 'SD10001@student.ump.edu.my', 'General User'),
 (3, 'ST10004', 'sui8972', 'Ajay A/L Darsh', 'Residen Pelajar 2, Blok C, Universiti Malaysia Pahang, Kampus Gambang.', 'Gambang', '0189852737', 'ST10004@staff.ump.edu.my', 'General User'),
-(4, 'RE10002', 'guy897@', 'Ang Zhi Nuo', '26, Jalan Tengku Arif Bendahara, Pekan, Pahang.', 'Pekan', '0120294348', 'ang@gmail.com', 'Restaurant Owner'),
-(5, 'RU10001', 'qwert01', 'Ahmad bin Ali', '81, Jalan Dewan Bahasa 2, Kampung Raja, Pahang.', 'Gambang', '0125342651', 'ahmad77@gmail.com', 'Rider');
+(4, 'RE10001', 'guy897@', 'Ang Zhi Nuo', '26, Jalan Tengku Arif Bendahara, Pekan, Pahang.', 'Pekan', '0120294348', 'ang@gmail.com', 'Restaurant Owner'),
+(5, 'RU10001', 'qwert01', 'Ahmad bin Ali', '81, Jalan Dewan Bahasa 2, Kampung Raja, Pahang.', 'Gambang', '0125342651', 'ahmad77@gmail.com', 'Rider'),
+(6, 'RE10002', 'efghi', 'Mark Lee', '105, jalan emas 9, Taman Emas.', 'Pekan', '0127137678', 'markLee@hotmail.com', 'Restaurant Owner'),
+(8, 'AM10002', 'abcdef', 'Puvanesh', '89, Jalan Sejahtera, Taman Sejahtera.', 'Pekan', '01489273746', 'puva@gmail.com', 'Admin'),
+(9, 'RU10002', 'xyz', 'Fatimah', '9, Jalan Cemerlang, Taman Cemerlang.', 'Kuantan', '0134587923', 'Fatimah@gamail.com', 'Rider');
 
 --
 -- Indexes for dumped tables
@@ -275,16 +281,17 @@ ALTER TABLE `menu_list`
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`od_ID`),
   ADD KEY `menu_ID` (`menu_ID`),
-  ADD KEY `order_ID` (`order_ID`);
+  ADD KEY `order_ID` (`order_ID`),
+  ADD KEY `username` (`username`);
 
 --
 -- Indexes for table `order_list`
 --
 ALTER TABLE `order_list`
   ADD PRIMARY KEY (`order_ID`),
-  ADD KEY `RO_username` (`RO_username`),
   ADD KEY `username` (`username`),
-  ADD KEY `rider_name` (`rider_username`);
+  ADD KEY `rider_name` (`rider_username`),
+  ADD KEY `rd_ID` (`rd_ID`);
 
 --
 -- Indexes for table `res_details`
@@ -308,19 +315,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `complaint_list`
 --
 ALTER TABLE `complaint_list`
-  MODIFY `complaint_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `complaint_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `delivery_ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `delivery_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `feedback_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `food_categories`
@@ -332,31 +339,31 @@ ALTER TABLE `food_categories`
 -- AUTO_INCREMENT for table `menu_list`
 --
 ALTER TABLE `menu_list`
-  MODIFY `menu_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `menu_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `od_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `od_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `order_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `res_details`
 --
 ALTER TABLE `res_details`
-  MODIFY `rd_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `rd_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -395,15 +402,16 @@ ALTER TABLE `menu_list`
 --
 ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`menu_ID`) REFERENCES `menu_list` (`menu_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`order_ID`) REFERENCES `order_list` (`order_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`order_ID`) REFERENCES `order_list` (`order_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_details_ibfk_3` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_list`
 --
 ALTER TABLE `order_list`
-  ADD CONSTRAINT `order_list_ibfk_1` FOREIGN KEY (`RO_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `order_list_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `order_list_ibfk_3` FOREIGN KEY (`rider_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `order_list_ibfk_3` FOREIGN KEY (`rider_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_list_ibfk_4` FOREIGN KEY (`rd_ID`) REFERENCES `res_details` (`rd_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `res_details`

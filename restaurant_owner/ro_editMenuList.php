@@ -33,6 +33,8 @@ $cPrice = $row['categoryPrice'];
     <script src="../js/menu.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script src="https://app.simplefileupload.com/buckets/c25e29925df7c5eb1b395046b983a1e4.js"></script>
 </head>
 
 <body>
@@ -62,11 +64,11 @@ $cPrice = $row['categoryPrice'];
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
                     <td>
-                        <img id="image" style="padding-right: 10px;" src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
-                        <br>
-                        <br>
-                        <input type="file" name="foodPhoto" id="foodPhoto" onchange="previewImg(this)">
-                    </td>
+                        <img src="<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <!-- <img id="image" style="padding-right: 10px;" src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>"> -->
+
+                        <input class="simple-file-upload" data-accepted="image/png, image/jpeg" type="hidden" name="foodPhoto" id="foodPhoto" style="padding-left: 1vw">
+                        </td>
                 </tr>
                 <tr>
                     <td>Food Name</td>

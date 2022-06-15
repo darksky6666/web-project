@@ -187,13 +187,14 @@ if (empty($_SESSION['logged_in'])) {
         <img src="../resources/ump logo.png" alt="UMP" width="100" height="100">
         <img src="../resources/foody logo.png" alt="Foody" width="100" height="100">
         <nav>
-        <a href="index.php">Delivery Note</a> 
+        <a href="index.php">Pending Order</a> 
+        <a href="acceptedOrder.php">Accepted Order</a> 
         <a class="active" href="deliveryRecord.php">Delivery Record</a> 
         <a href="riderReport.php">Rider Report</a>
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 

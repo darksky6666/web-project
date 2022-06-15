@@ -29,6 +29,8 @@ if (!is_dir($testLoc)) {
     <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script src="https://app.simplefileupload.com/buckets/c25e29925df7c5eb1b395046b983a1e4.js"></script>
 </head>
 
 <body>
@@ -52,16 +54,17 @@ if (!is_dir($testLoc)) {
     <div class="wrapper">
         <h3>Add new menu</h3>
         <br>
-        <form action="../db/insertdb.php" name="addForm" method="POST" enctype="multipart/form-data" onsubmit="return checkData()">
+        <form action="../db/insertdb.php" name="addForm" method="POST" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td style="width: 10%;">Food Photo</td>
                     <td>
-                        <img id="image" style="padding-right: 10px;" src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <!-- <img id="image" style="padding-right: 10px;" src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>"> -->
                         <br>
                         <br>
-                        <input type="file" name="foodPhoto" id="foodPhoto" accept="image/png, image/jpeg" onchange="previewImg(this)">
-                        <span class="error" id="picErr"></span>
+                        <input class="simple-file-upload" data-accepted="image/png, image/jpeg" type="hidden" name="foodPhoto" id="foodPhoto">
+                        <!-- <input type="file" name="foodPhoto" id="foodPhoto" accept="image/png, image/jpeg" onchange="previewImg(this)"> -->
+                        <!-- <span class="error" id="picErr"></span> -->
                     </td>
                 </tr>
                 <tr>

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -150,9 +157,10 @@
         <a href="../general_user/checkout.php">Order List</a> 
         <a href="../general_user/expensesReport.php">Expenses Report</a>
         <a href="../complaint/UserViewComplaint.php">My Complaint</a>
-        <a href="logout.php" onclick="return checklogout()">Logout</a>
+        <script src="../js/logout.js"></script>
+        <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -179,13 +187,16 @@
           $rdName = $row["rdName"];
           $cuisinesType = $row["cuisinesType"];
           $varietyType = $row["varietyType"];
+          $RO_username = $row["RO_username"];
+          // $rd_ID = $row["rd_ID"];
+
     ?>
 
         <table style="width:50%">
           <tr>
             <td>
               <h3><b><?php echo $rdName; ?></b></h3>
-              <img class="image" src="../resources/<?php echo $rdPhoto; ?>" alt="<?php echo $rdName; ?>"><br>
+              <img class="image" src="<?php echo $rdPhoto; ?>" alt="<?php echo $rdName; ?>"><br>
               <?php echo $cuisinesType; ?><br><br>
               <?php echo $varietyType; ?><br><br>
               <button onclick="document.location='orderPage.php?rName=<?php echo $rdName; ?>'">Order</button>

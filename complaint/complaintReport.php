@@ -135,7 +135,7 @@ function checklogout(){
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 

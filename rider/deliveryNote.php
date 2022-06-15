@@ -4,6 +4,7 @@ if (empty($_SESSION['logged_in'])) {
     header("Location: ../manage_user/indexLogin.php");
     exit();
 }
+$rider_username=$_SESSION['rider_username'];
 ?>
 
 <!DOCTYPE html>
@@ -218,13 +219,14 @@ if (empty($_SESSION['logged_in'])) {
         <img src="../resources/ump logo.png" alt="UMP" width="100" height="100">
         <img src="../resources/foody logo.png" alt="Foody" width="100" height="100">
         <nav>
-        <a class="active" href="index.php">Delivery Note</a> 
+        <a href="index.php">Pending Order</a> 
+        <a class="active" href="acceptedOrder.php">Accepted Order</a> 
         <a href="deliveryRecord.php">Delivery Record</a> 
         <a href="riderReport.php">Rider Report</a>
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -239,14 +241,14 @@ include("../db/db.php");
 
 $idURL = $_GET['id'];
 
-$query = "SELECT d.delivery_ID, o.order_ID, o.totalPayment, o.orderDate, o.orderTime, o.orderStatus, 
+$query = "SELECT o.order_ID, o.totalPayment, o.orderDate, o.orderTime, o.orderStatus, 
 u.name, o.delLocation, u.phoneNum, r.rdName, r.rdLocation, r.rdContactNo, 
 m.foodName, od.orderQuantity, od.totalPrice 
-FROM delivery AS d, order_list AS o, user AS u, res_details AS r, 
+FROM order_list AS o, user AS u, res_details AS r, 
 order_details AS od, menu_list AS m 
-WHERE d.order_ID = o.order_ID AND d.rd_ID = r.rd_ID 
+WHERE m.rd_ID = r.rd_ID 
 AND o.username = u.username AND od.menu_ID = m.menu_ID 
-AND o.order_ID = '$idURL'";
+AND od.order_ID = '$idURL' AND o.rider_username = '$rider_username'";
 $result = mysqli_query($conn,$query) or die ("Could not execute query in deliveryNote.php");
 $row = mysqli_fetch_assoc($result);
 

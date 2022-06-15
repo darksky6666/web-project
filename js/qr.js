@@ -10,5 +10,5 @@ function generateQR(id, status, roID) {
     const qr = new QRCode(qrcode);
 
     // Temp link
-    qr.makeCode(`http://127.0.0.1/project/db/updateOrderStatus.php?id=${id}&status=${status}&roID=${roID}`);
+    qr.makeCode(`https://foodyc5.herokuapp.com/db/updateOrderStatus.php?id=${id}&status=${status}&roID=${roID}`);
 }

@@ -1,4 +1,7 @@
 <?php
+session_start();
+$username=$_SESSION['username'];
+$rd_ID=$_SESSION['rd_ID'];
 
 include("../db/db.php");
 
@@ -12,7 +15,7 @@ $orderTime = date("H:i:s", time());
 $orderStatus = "Incomplete";
 
 
-$query = "INSERT INTO `order_list`(`orderDate`, `ordertime`, `orderStatus`) VALUES ('$orderDate', '$orderTime', '$orderStatus')";
+$query = "INSERT INTO `order_list`(`orderDate`, `ordertime`, `orderStatus`,`username`,`rd_ID`) VALUES ('$orderDate', '$orderTime', '$orderStatus','$username','$rd_ID')";
 
 if (mysqli_query($conn, $query)) {
       

@@ -4,6 +4,7 @@ if (empty($_SESSION['logged_in'])) {
     header("Location: ../manage_user/indexLogin.php");
     exit();
 }
+$username=$_SESSION['username'];
 ?>
 <!DOCTYPE html>
 <head>
@@ -109,17 +110,17 @@ footer > div > div {
 </head>
 
 <header class="wrapper">
-        <img src="../resources/ump logo.png" alt="UMP" width="100" height="100">
-        <img src="foody logo.png" alt="Foody" width="100" height="100">
+        <img src="../resources/../resources/ump logo.png" alt="UMP" width="100" height="100">
+        <img src="../resources/foody logo.png" alt="Foody" width="100" height="100">
         <nav>
-        <a href="#resList">Restaurant List</a> 
-        <a href="checkout.php">Order List</a> 
-        <a href="#expenses">Expenses Report</a>
-        <a class="active" href="UserViewComplaint.php">My Complaint</a>
+        <a href="../general_user/resList.php">Restaurant List</a> 
+        <a href="../general_user/checkout.php">Order List</a> 
+        <a href="../general_user/expensesReport.php">Expenses Report</a>
+        <a class="active" href="../complaint/UserViewComplaint.php">My Complaint</a>
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -132,7 +133,7 @@ include '../db/db.php';
 
 $complaintID = $_GET['complaintID'];
 
-$query = "SELECT o.order_ID, o.orderDate, o.orderTime, c.complaintType, c.complaintDesc FROM order_list AS o,complaint_list AS c WHERE o.order_ID = c.order_ID AND c.complaint_ID = '$complaintID'";
+$query = "SELECT o.order_ID, o.orderDate, o.orderTime, c.complaintType, c.complaintDesc FROM order_list AS o,complaint_list AS c WHERE o.order_ID = c.order_ID AND c.complaint_ID = '$complaintID' AND o.username='$username'";
 $result = mysqli_query($conn, $query) or die (mysqli_error());
 $row = mysqli_fetch_array($result);
 

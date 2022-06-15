@@ -3,7 +3,8 @@ include '../db/db.php';
 
 $year=substr($monthSelector,0,4);
 $month=substr($monthSelector,5,2);
-$dayNum=cal_days_in_month(CAL_GREGORIAN,(int)$month,(int)$year);
+include '../db/day.php';
+$dayNum=days_in_month((int)$month,(int)$year);
 
 // Total Amount
 $sqlAmount="SELECT COUNT(`order_ID`), WEEK(`orderDate`), SUM(`totalPayment`) FROM `order_list` WHERE MONTH(`orderDate`)='$month' AND YEAR(`orderDate`)='$year' GROUP BY WEEK(`orderDate`) ORDER BY `orderDate` ASC;";

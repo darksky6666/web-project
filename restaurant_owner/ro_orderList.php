@@ -7,7 +7,11 @@ if (empty($_SESSION['logged_in'])) {
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php';
 include '../db/validateRestaurant.php';
-$sql="SELECT ol.order_ID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username AND ol.RO_username='$RO_username' ORDER BY ol.orderDate DESC";
+$resultrdID = mysqli_query($conn, "SELECT `rd_ID` FROM `res_details` WHERE `RO_username`='$RO_username'") or die(mysqli_error());
+$rowrdID=mysqli_fetch_assoc($resultrdID);
+$rd_ID = $rowrdID['rd_ID'];
+
+$sql="SELECT ol.order_ID, user.name, ol.delLocation, ol.orderDate, ol.orderTime, ol.orderStatus FROM `order_list` `ol`, `user` WHERE user.username=ol.username AND ol.rd_ID='$rd_ID' ORDER BY ol.orderDate DESC";
 $result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -64,7 +68,7 @@ $rowcount=mysqli_num_rows($result);
                         echo "<tr>";
                         echo "<td>".++$i."</td>";
                         echo "<td>".$row['name']."</td>";
-                        echo "<td>".$row['address']."</td>";
+                        echo "<td>".$row['delLocation']."</td>";
                         echo "<td>".$row['orderDate']."</td>";
                         echo "<td>".$row['orderTime']."</td>";
                         echo "<td>".$row['orderStatus']."</td>";

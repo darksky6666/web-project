@@ -20,7 +20,7 @@ if($result){
     // Delete the photo when sql query is successful
     if (is_file($loc)) {
         // If Linux user, please uncomment the line below
-        // chmod($loc, 0777);
+        chmod($loc, 0777);
         unlink(realpath($loc));
     }
     echo "<script type = 'text/javascript'> alert('$successMsg') </script>";

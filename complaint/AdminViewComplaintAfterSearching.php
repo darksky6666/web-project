@@ -136,7 +136,7 @@ function checklogout(){
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -204,18 +204,6 @@ if(isset($_POST['searchComplaint']))
     </a>
 </div>
 
-<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-<div id="QRCode"></div>
-<script type="text/javascript">
-    var qrcode = new QRCode(document.getElementById("QRCode"), {
-        text: "http://localhost/M5/complaintReport.php",
-        width: 128,
-        height: 128,
-        colorDark: "#6C5A8A",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-</script>
 </body>
 
 

@@ -11,7 +11,7 @@ echo "<script src='../js/user.js'></script>";
 echo "<script type = 'text/javascript'> deleteConfirmBox() </script>";
 
 $query = "DELETE FROM user WHERE `user_id` = '$id'";
-$result = mysqli_query($conn,$query) or die ("Could not execute query in updateProfile.php");
+$result = mysqli_query($conn,$query) or die ("Could not execute query in update#profile");
 
 if($result){
 echo "<script type= 'text/javascript'> window.location='userList.php'</script>";

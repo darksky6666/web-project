@@ -4,6 +4,7 @@ if (empty($_SESSION['logged_in'])) {
     header("Location: ../manage_user/indexLogin.php");
     exit();
 }
+$username=$_SESSION['username'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,14 +121,14 @@ if (empty($_SESSION['logged_in'])) {
         <img src="../resources/../resources/ump logo.png" alt="UMP" width="100" height="100">
         <img src="../resources/foody logo.png" alt="Foody" width="100" height="100">
         <nav>
-        <a href="#resList">Restaurant List</a> 
-        <a href="checkout.php">Order List</a> 
-        <a href="#expenses">Expenses Report</a>
-        <a href="UserViewComplaint.php">My Complaint</a>
+        <a href="../general_user/resList.php">Restaurant List</a> 
+        <a href="../general_user/checkout.php">Order List</a> 
+        <a href="../general_user/expensesReport.php">Expenses Report</a>
+        <a class="active" href="../complaint/UserViewComplaint.php">My Complaint</a>
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -138,11 +139,6 @@ if (empty($_SESSION['logged_in'])) {
 
 <?php
 include("../db/db.php");
-
-// session_start();
-    
-// $_SESSION['GeneralUserName']='1';
-// $GeneralUserName=$_SESSION['GeneralUserName'];
 
 $order_ID = $_GET['order_ID'];
 

@@ -7,7 +7,7 @@ if (empty($_SESSION['logged_in'])) {
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php'; 
 include '../db/validateRestaurant.php';
-$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryName, fc.categoryPrice, rd.RO_username FROM `menu_list` `menu`, `food_categories` `fc`, `res_details` rd WHERE menu.fc_ID = fc.fc_ID AND menu.rd_ID = rd.rd_ID AND rd.RO_username = '$RO_username' ORDER BY menu.menu_ID;";
+$sql="SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryName, fc.categoryPrice, menu.rd_ID, rd.RO_username FROM `menu_list` `menu`, `food_categories` `fc`, `res_details` rd WHERE menu.fc_ID = fc.fc_ID AND menu.rd_ID = rd.rd_ID AND rd.RO_username = '$RO_username' ORDER BY menu.menu_ID;";
 $result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 ?>
@@ -25,6 +25,7 @@ $rowcount=mysqli_num_rows($result);
     <link rel="stylesheet" href="../css/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://app.simplefileupload.com/buckets/c25e29925df7c5eb1b395046b983a1e4.js"></script>
 </head>
 <body>
     <header class="wrapper">
@@ -85,7 +86,7 @@ $rowcount=mysqli_num_rows($result);
                 <span class="fCat" style="display: none;"><?php echo $categoryName ?></span>
                 <tr>
                     <td rowspan=2 class="td-1">
-                        <img src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img src="<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                     </td>
                     <td class="td-2">
                         <?php echo $foodName; ?>

@@ -166,25 +166,25 @@ $Utype = $row["userType"];
 </h2>
 <form method="post" action="update.php">
     Username:
-    <br><textarea name="Uname" cols="30" rows="1"><?php echo $Uname; ?></textarea>
+    <br><textarea name="Uname" cols="30" rows="1" required><?php echo $Uname; ?></textarea>
     <br><br>
     Password:
-    <br><textarea name="Pass" cols="30" rows="1"><?php echo $Pass; ?></textarea>
+    <br><textarea name="Pass" cols="30" rows="1" required><?php echo $Pass; ?></textarea>
     <br><br>
     Name:
-    <br><textarea name="Name" cols="30" rows="1"><?php echo $Name; ?></textarea>
+    <br><textarea name="Name" cols="30" rows="1" required><?php echo $Name; ?></textarea>
     <br><br>
     Address:
-    <br><textarea name="Add" cols="30" rows="8"><?php echo $Add; ?></textarea>
+    <br><textarea name="Add" cols="30" rows="8" required><?php echo $Add; ?></textarea>
     <br><br>
     Phone Number:
-    <br><textarea name="PhoneNum" cols="30" rows="1"><?php echo $PhoneNum; ?></textarea>
+    <br><textarea name="PhoneNum" cols="30" rows="1" required><?php echo $PhoneNum; ?></textarea>
     <br><br>
     Email Address:
-    <br><textarea name="EmailAdd" cols="30" rows="2"><?php echo $EmailAdd; ?></textarea>
+    <br><textarea name="EmailAdd" cols="30" rows="2" required><?php echo $EmailAdd; ?></textarea>
     <br><br>
     User Type:
-    <br><select id="uType" name="Utype">
+    <br><select id="uType" name="Utype" required>
             <option value="General User">General User (UMP Staff or Student)</option>
             <option value="Admin">Administrator</option>
             <option value="Restaurant Owner">Restaurant Owner</option>

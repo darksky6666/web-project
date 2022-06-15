@@ -9,7 +9,7 @@ $id = $_GET['order_ID'];
 $length = 5;
 
 include '../db/db.php';
-$sql="SELECT ol.order_ID, user.name, user.address, ol.orderDate, ol.orderTime, ol.orderStatus, ml.foodName, od.orderQuantity, fc.categoryPrice FROM `order_list` `ol`, `order_details` `od`, `user`, `menu_list` `ml`, `food_categories` `fc` WHERE user.username=ol.username AND ol.order_ID=od.order_ID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.order_ID=$id;";
+$sql="SELECT ol.order_ID, user.name, ol.delLocation, ol.orderDate, ol.orderTime, ol.orderStatus, ml.foodName, od.orderQuantity, fc.categoryPrice FROM `order_list` `ol`, `order_details` `od`, `user`, `menu_list` `ml`, `food_categories` `fc` WHERE user.username=ol.username AND ol.order_ID=od.order_ID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.order_ID=$id;";
 $result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
 if ($rowcount==0) {
@@ -18,7 +18,7 @@ if ($rowcount==0) {
 }
 $row=mysqli_fetch_all($result, MYSQLI_ASSOC);
 $name=$row[0]['name'];
-$address=$row[0]['address'];
+$address=$row[0]['delLocation'];
 $orderDate=$row[0]['orderDate'];
 $orderTime=$row[0]['orderTime'];
 $orderStatus=$row[0]['orderStatus'];

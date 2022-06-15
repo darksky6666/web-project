@@ -151,11 +151,12 @@
         <img src="../resources/ump logo.png" alt="UMP" width="100" height="100">
         <img src="../resources/foody logo.png" alt="Foody" width="100" height="100">
         <nav>
-        <a class="active" href="resList.php">Restaurant List</a> 
-        <a href="orderList.php">Order List</a> 
-        <a href="expensesReport.php">Expenses Report</a>
-        <a href="UserViewComplaint.php">My Complaint</a>
-        <a href="logout.php" onclick="return checklogout()">Logout</a>
+        <a class="active" href="../general_user/resList.php">Restaurant List</a> 
+        <a href="../general_user/orderList.php">Order List</a> 
+        <a href="../general_userexpensesReport.php">Expenses Report</a>
+        <a href="../complaint/UserViewComplaint.php">My Complaint</a>
+        <script src="../js/logout.js"></script>
+        <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
         <a><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
@@ -189,7 +190,7 @@
           <tr>
             <td>
               <h3><b><?php echo $rdName; ?></b></h3>
-              <img class="image" src="../resources/<?php echo $rdPhoto; ?>" alt="<?php echo $rdName; ?>"><br>
+              <img class="image" src="<?php echo $rdPhoto; ?>" alt="<?php echo $rdName; ?>"><br>
               <?php echo $cuisinesType; ?><br><br>
               <?php echo $varietyType; ?><br><br>
               <button onclick="document.location='orderPage.php?rName=<?php echo $rdName; ?>'">Order</button>

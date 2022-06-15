@@ -132,28 +132,28 @@
 </h2>
 <form method="post" action="insertUser.php">
     Username:
-    <br><textarea name="Uname" cols="30" rows="1"></textarea>
+    <br><textarea name="Uname" cols="30" rows="1" required></textarea>
     <br><br>
     Password:
-    <br><textarea name="Pass" cols="30" rows="1"></textarea>
+    <br><textarea name="Pass" cols="30" rows="1" required></textarea>
     <br><br>
     Name:
-    <br><textarea name="Name" cols="30" rows="1"></textarea>
+    <br><textarea name="Name" cols="30" rows="1" required></textarea>
     <br><br>
     Address:
-    <br><textarea name="Add" cols="30" rows="8"></textarea>
+    <br><textarea name="Add" cols="30" rows="8" required></textarea>
     <br><br>
     Region:
-    <br><textarea name="Reg" cols="30" rows="1"></textarea>
+    <br><textarea name="Reg" cols="30" rows="1" required></textarea>
     <br><br>
     Phone Number:
-    <br><textarea name="PhoneNum" cols="30" rows="1"></textarea>
+    <br><textarea name="PhoneNum" cols="30" rows="1" required></textarea>
     <br><br>
     Email Address:
-    <br><textarea name="EmailAdd" cols="30" rows="2"></textarea>
+    <br><textarea name="EmailAdd" cols="30" rows="2" required></textarea>
     <br><br>
     User Type:
-    <br><select id="uType" name="Utype">
+    <br><select id="uType" name="Utype" required>
             <option value="General User">General User (UMP Staff or Student)</option>
             <option value="Admin">Administrator</option>
             <option value="Restaurant Owner">Restaurant Owner</option>

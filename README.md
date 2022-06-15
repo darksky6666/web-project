@@ -6,7 +6,7 @@
 ## Progress
 - [x] ~~Manage user~~
 - [x] ~~Restaurant Owner~~
-- [ ] Complaint
-- [ ] Rider
-- [ ] General User
-- [ ] Hosting
+- [x] ~~Complaint~~
+- [x] ~~Rider~~
+- [x] ~~General User~~
+- [x] ~~Hosting~~

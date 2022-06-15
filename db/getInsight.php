@@ -1,12 +1,17 @@
 <?php 
 include 'db.php';
+$RO_username=$_SESSION['RO_username'];
+$resultrdID = mysqli_query($conn, "SELECT `rd_ID` FROM `res_details` WHERE `RO_username`='$RO_username'") or die(mysqli_error());
+$rowrdID=mysqli_fetch_assoc($resultrdID);
+$rd_ID = $rowrdID['rd_ID'];
 
 $year=substr($monthSelector,0,4);
 $month=substr($monthSelector,5,2);
-$dayNum=cal_days_in_month(CAL_GREGORIAN,(int)$month,(int)$year);
+include 'day.php';
+$dayNum=days_in_month((int)$month,(int)$year);
 
 // Total Amount
-$sqlAmount="SELECT COUNT(`order_ID`), WEEK(`orderDate`), SUM(`totalPayment`) FROM `order_list` WHERE `RO_username`='$RO_username' AND MONTH(`orderDate`)='$month' AND YEAR(`orderDate`)='$year' GROUP BY WEEK(`orderDate`) ORDER BY `orderDate` ASC;";
+$sqlAmount="SELECT COUNT(`order_ID`), WEEK(`orderDate`), SUM(`totalPayment`) FROM `order_list` WHERE `rd_ID`='$rd_ID' AND MONTH(`orderDate`)='$month' AND YEAR(`orderDate`)='$year' GROUP BY WEEK(`orderDate`) ORDER BY `orderDate` ASC;";
 $resultAmount=mysqli_query($conn,$sqlAmount) or die(mysqli_error($conn));
 
 $totalAmount=array();
@@ -18,7 +23,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
 }
 
 // Total order
-$sqlOrder="SELECT COUNT(`order_ID`), `orderDate`, SUM(`totalPayment`) FROM `order_list` WHERE `RO_username`='$RO_username' AND MONTH(`orderDate`)='$month' AND YEAR(`orderDate`)='$year' GROUP BY `orderDate` ORDER BY `orderDate` ASC;";
+$sqlOrder="SELECT COUNT(`order_ID`), `orderDate`, SUM(`totalPayment`) FROM `order_list` WHERE `rd_ID`='$rd_ID' AND MONTH(`orderDate`)='$month' AND YEAR(`orderDate`)='$year' GROUP BY `orderDate` ORDER BY `orderDate` ASC;";
 $resultOrder=mysqli_query($conn,$sqlOrder) or die(mysqli_error($conn));
 
 $totalOrder=array();
@@ -30,7 +35,7 @@ while ($dayNum-- > 0 && $rowOrder=mysqli_fetch_array($resultOrder)) {
 }
 
 // Total accumulated payment
-$sqlAccumulated="SELECT MONTH(`orderDate`), SUM(`totalPayment`) FROM `order_list` WHERE `RO_username`='$RO_username' GROUP BY MONTH(`orderDate`) ORDER BY `orderDate` ASC";
+$sqlAccumulated="SELECT MONTH(`orderDate`), SUM(`totalPayment`) FROM `order_list` WHERE `rd_ID`='$rd_ID' GROUP BY MONTH(`orderDate`) ORDER BY `orderDate` ASC";
 $resultAccumulated=mysqli_query($conn,$sqlAccumulated) or die(mysqli_error($conn));
 
 $monthAccumulated=array();

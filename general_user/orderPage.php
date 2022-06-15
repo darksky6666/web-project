@@ -1,6 +1,13 @@
 <?php
-$rName = $_GET['rName'];
 session_start();
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
+?>
+
+<?php
+$rName = $_GET['rName'];
 $_SESSION["order"]=""
 ?>
 
@@ -143,9 +150,10 @@ $_SESSION["order"]=""
         <a href="../general_user/checkout.php">Order List</a> 
         <a href="../general_user/expensesReport.php">Expenses Report</a>
         <a href="../complaint/UserViewComplaint.php">My Complaint</a>
-        <a href="logout.php" onclick="return checklogout()">Logout</a>
+        <script src="../js/logout.js"></script>
+        <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -164,6 +172,10 @@ $_SESSION["order"]=""
       $rdContactNo = $row["rdContactNo"];
       $rdOpTime = $row["rdOpTime"];
       $rdLocation = $row["rdLocation"];
+      $RO_username = $row["RO_username"];
+      
+      $rd_ID = $row["rd_ID"];
+      $_SESSION['rd_ID']=$rd_ID;
     ?>
       <h2><?php echo $rdName; ?></h2>
       <p><?php printf ("Restaurant Contact No : %s", $rdContactNo); ?></p>
@@ -172,7 +184,7 @@ $_SESSION["order"]=""
       <hr>
       <h2>Menu List</h2>
     <?php
-    $query2 = "SELECT m.menu_ID, m.foodPhoto, m.foodName, m.foodDesc, fc.categoryPrice FROM menu_list AS m, food_categories AS fc WHERE m.fc_ID = fc.fc_ID";
+    $query2 = "SELECT m.menu_ID, m.foodPhoto, m.foodName, m.foodDesc, fc.categoryPrice FROM menu_list AS m, food_categories AS fc WHERE m.fc_ID = fc.fc_ID AND m.rd_ID='$rd_ID'";
     $result2 = mysqli_query($conn,$query2);
       if(mysqli_num_rows($result2)>0){
           while ($row=mysqli_fetch_assoc($result2)) {
@@ -185,7 +197,7 @@ $_SESSION["order"]=""
         <table style="width:50%">
           <tr>
             <td>
-              <img class="image" src="../resources/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>"><br>
+              <img class="image" src="<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>"><br>
 	      <h3><b><?php echo $foodName; ?></b></h3>
               <p><?php echo $foodDesc; ?></p>
               <p><?php printf ("RM %.2f", $categoryPrice); ?></p>

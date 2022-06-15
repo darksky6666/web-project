@@ -7,7 +7,10 @@ if (empty($_SESSION['logged_in'])) {
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php';
 $search = $_POST['search'];
-$sql = sprintf("SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, rd.RO_username FROM `menu_list` `menu`, `food_categories` `fc`, `res_details` rd WHERE menu.fc_ID = fc.fc_ID AND menu.rd_ID = rd.rd_ID AND menu.foodName LIKE '%s%%' ORDER BY menu.menu_ID;", 
+$resultrdID = mysqli_query($conn, "SELECT `rd_ID` FROM `res_details` WHERE `RO_username`='$RO_username'") or die(mysqli_error());
+$rowrdID=mysqli_fetch_assoc($resultrdID);
+$rd_ID = $rowrdID['rd_ID'];
+$sql = sprintf("SELECT menu.menu_ID, menu.foodName, menu.foodPhoto, menu.foodDesc, menu.foodAvailability, fc.categoryPrice, menu.rd_ID FROM `menu_list` `menu`, `food_categories` `fc` WHERE menu.fc_ID = fc.fc_ID AND menu.rd_ID = $rd_ID AND menu.foodName LIKE '%s%%' ORDER BY menu.menu_ID;", 
                 mysqli_real_escape_string($conn,$search) );
 $result=mysqli_query($conn,$sql) or die (mysqli_error());
 $rowcount=mysqli_num_rows($result);
@@ -64,7 +67,7 @@ $rowcount=mysqli_num_rows($result);
             <table>
                 <tr>
                     <td rowspan=2 class="td-1">
-                        <img src="../resources/menu/<?php echo $RO_username ?>/<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
+                        <img src="<?php echo $foodPhoto; ?>" alt="<?php echo $foodName; ?>">
                     </td>
                     <td class="td-2">
                         <?php echo $foodName; ?>

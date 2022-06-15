@@ -4,6 +4,32 @@ if (empty($_SESSION['logged_in'])) {
     header("Location: ../manage_user/indexLogin.php");
     exit();
 }
+
+include("../db/db.php");
+
+$idURL = $_GET['id'];
+$query = "SELECT o.order_ID, c.complaint_ID, c.complaintDate, c.complaintTime, c.complaintStatus, c.complaintType, c.complaintDesc, f.fDesc, f.fDate, f.fTime, u.name 
+FROM complaint_list AS c, user AS u, order_list AS o, feedback AS f 
+WHERE o.order_ID = f.order_ID AND c.order_ID = o.order_ID AND o.username = u.username 
+AND o.order_ID = '$idURL'";
+
+$result = mysqli_query($conn,$query) or die ("Could not execute query in updateComplaintStatus.php");
+$row = mysqli_fetch_assoc($result);
+
+$id = $row["order_ID"];
+$complaint_ID = $row["complaint_ID"];
+$name = $row["name"];
+$fDesc = $row["fDesc"];
+$fDate = $row["fDate"];
+$fTime = $row["fTime"];
+$complaintDate = $row["complaintDate"];
+$complaintTime = $row["complaintTime"];
+$complaintStatus = $row["complaintStatus"];
+$complaintType = $row["complaintType"];
+$complaintDesc = $row["complaintDesc"];
+$length = 5;
+
+//@mysql_free_result($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +42,16 @@ if (empty($_SESSION['logged_in'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Complaint Status</title>
+    <script>
+        // Delete Confirmation 
+        function checkDelete(){
+            let deleteConfirm = confirm('Are you sure you want to remove this entry?\nThis process is not reversible.');
+            if (deleteConfirm != true) {
+                return false;
+            }
+            return true;
+        }
+    </script>
     <style>
         /*header*/
         header {
@@ -173,27 +209,23 @@ if (empty($_SESSION['logged_in'])) {
         }
 
     </style>
-</head>
 
-<script>
-function checklogout(){
-  return confirm('Are you sure to Logout?');
-}
-</script>
-<script src="delete.js"></script>
+
+</head>
 
 
 <header class="wrapper">
         <img src="../resources/ump logo.png" alt="UMP" width="100" height="100">
         <img src="../resources/foody logo.png" alt="Foody" width="100" height="100">
         <nav>
-        <a href="index.php">Delivery Note</a> 
+        <a href="index.php">Pending Order</a> 
+        <a href="acceptedOrder.php">Accepted Order</a> 
         <a class="active" href="deliveryRecord.php">Delivery Record</a> 
         <a href="riderReport.php">Rider Report</a>
         <script src="../js/logout.js"></script>
         <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
-        <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
+        <a href="#profile"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>
         <h3>Off Oven, On Doorstep</h3>
 
@@ -203,33 +235,6 @@ function checklogout(){
 </header>
 
 <body>
-<?php
-include("../db/db.php");
-
-$idURL = $_GET['id'];
-$query = "SELECT o.order_ID, c.complaint_ID, c.complaintDate, c.complaintTime, c.complaintStatus, c.complaintType, c.complaintDesc, f.fDesc, f.fDate, f.fTime, u.name 
-FROM complaint_list AS c, user AS u, order_list AS o, feedback AS f 
-WHERE o.order_ID = f.order_ID AND c.order_ID = o.order_ID AND o.username = u.username 
-AND o.order_ID = '$idURL'";
-
-$result = mysqli_query($conn,$query) or die ("Could not execute query in updateComplaintStatus.php");
-$row = mysqli_fetch_assoc($result);
-
-$id = $row["order_ID"];
-$complaint_ID = $row["complaint_ID"];
-$name = $row["name"];
-$fDesc = $row["fDesc"];
-$fDate = $row["fDate"];
-$fTime = $row["fTime"];
-$complaintDate = $row["complaintDate"];
-$complaintTime = $row["complaintTime"];
-$complaintStatus = $row["complaintStatus"];
-$complaintType = $row["complaintType"];
-$complaintDesc = $row["complaintDesc"];
-$length = 5;
-
-//@mysql_free_result($result);
-?>
 
     <h2 style="text-align: center">Complaint Details</h2>
     <div class="row">
@@ -290,8 +295,9 @@ $length = 5;
         <br><input type ="submit" class="button" style="width:150px" name="edit" value="Edit Feedback">
             </form>
 
-            <form action="deleteDB.php?id=<?php echo $id; ?>" method="post">
-        <input type ="submit" class="delete" style="width:150px" name="delete" value="Delete Feedback">
+            <form action="deleteDB.php" method="post" onsubmit="return checkDelete();">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <input type ="submit" class="delete" style="width:150px" name="delete" value="Delete Feedback">
             </form>
 
         <form action="deliveryRecord.php?id=<?php echo $id; ?>" method="post">

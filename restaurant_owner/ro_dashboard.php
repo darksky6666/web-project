@@ -21,7 +21,7 @@ if ($rowrName == 0) {
 $rdName=$rowrName['rdName'];
 
 // Total Amount
-$sqlAmount="SELECT COUNT(`order_ID`), WEEK(`orderDate`), SUM(`totalPayment`) FROM `order_list` WHERE `RO_username`='$RO_username' GROUP BY WEEK(`orderDate`) ORDER BY `orderDate` ASC;";
+$sqlAmount="SELECT COUNT(`order_ID`), WEEK(`orderDate`), SUM(`totalPayment`) FROM `order_list` WHERE `rd_ID`='$rd_ID' GROUP BY WEEK(`orderDate`) ORDER BY `orderDate` ASC;";
 $resultAmount=mysqli_query($conn,$sqlAmount) or die(mysqli_error($conn));
 
 $totalAmount=array();
@@ -255,7 +255,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
                 <div class="card">
                     <h3>Total Revenue</h3>
                     <?php
-                        $sqlRevenue = "SELECT `totalPayment` FROM `order_list` WHERE `RO_username`='$RO_username';";
+                        $sqlRevenue = "SELECT `totalPayment` FROM `order_list` WHERE `rd_ID`='$rd_ID';";
                         $resultRevenue = mysqli_query($conn, $sqlRevenue);
                         $countRevenue = mysqli_num_rows($resultRevenue);
                         if ($countRevenue = 0) {
@@ -278,7 +278,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
                 <div class="card">
                     <h3>Total Orders</h3>
                     <?php
-                        $sqlOrder = "SELECT * FROM `order_list` WHERE `RO_username`='$RO_username';";
+                        $sqlOrder = "SELECT * FROM `order_list` WHERE `rd_ID`='$rd_ID';";
                         $resultOrder = mysqli_query($conn, $sqlOrder);
                         $countOrder = mysqli_num_rows($resultOrder);
                     ?>
@@ -290,7 +290,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
                 <div class="card">
                     <h3>Total Customers</h3>
                     <?php
-                        $sqlCustomer = "SELECT `username` FROM `order_list` WHERE `RO_username`='$RO_username' GROUP BY `username`;";
+                        $sqlCustomer = "SELECT `username` FROM `order_list` WHERE `rd_ID`='$rd_ID' GROUP BY `username`;";
                         $resultCustomer = mysqli_query($conn, $sqlCustomer);
                         $countCustomer = mysqli_num_rows($resultCustomer);
                     ?>
@@ -319,7 +319,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
                 <th>SOLD</th>
             </tr>
             <?php
-            $sqlPopular = "SELECT ml.menu_ID, ml.foodName, fc.categoryName, fc.categoryPrice, SUM(od.`orderQuantity`) FROM `order_details` od, `menu_list` ml, `order_list` ol, `food_categories` fc WHERE ol.order_ID=od.order_ID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.RO_username='$RO_username' GROUP BY od.menu_ID ORDER BY SUM(od.`orderQuantity`) DESC LIMIT 5;";
+            $sqlPopular = "SELECT ml.menu_ID, ml.foodName, fc.categoryName, fc.categoryPrice, SUM(od.`orderQuantity`) FROM `order_details` od, `menu_list` ml, `order_list` ol, `food_categories` fc WHERE ol.order_ID=od.order_ID AND od.menu_ID=ml.menu_ID AND ml.fc_ID=fc.fc_ID AND ol.rd_ID='$rd_ID' GROUP BY od.menu_ID ORDER BY SUM(od.`orderQuantity`) DESC LIMIT 5;";
             $resultPopular = mysqli_query($conn, $sqlPopular);
             $countPopular = mysqli_num_rows($resultPopular);
             $rank = 1;
