@@ -1,7 +1,7 @@
 <?php
 include '../db/db.php';
 session_start();
-$_SESSION['RO_username']='RE10001';
+$_SESSION['RO_username']='RE10002';
 $RO_username=$_SESSION['RO_username'];
 
 $resultrdID = mysqli_query($conn, "SELECT `rd_ID` FROM `res_details` WHERE `RO_username`='$RO_username'") or die(mysqli_error());
@@ -202,8 +202,8 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
 
 <body onload="initialize()">
     <header class="wrapper">
-        <img src="../resources/umplogo.png" alt="UMP" width="5%">
-        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/ump logo.png" alt="UMP" width="5%">
+        <img src="../resources/foody logo.png" alt="Foody" width="5%">
         <nav>
             <a class="active" href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
@@ -212,7 +212,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="../resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>

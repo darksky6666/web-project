@@ -1,7 +1,7 @@
 <?php
 session_start();
 $RO_username=$_SESSION['RO_username'];
-$id = $_GET['orderID'];
+$id = $_GET['order_ID'];
 $length = 5;
 
 include '../db/db.php';
@@ -38,8 +38,8 @@ $totalPrice=0;
 
 <body>
     <header class="wrapper">
-        <img src="../resources/umplogo.png" alt="UMP" width="5%">
-        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/ump logo.png" alt="UMP" width="5%">
+        <img src="../resources/foody logo.png" alt="Foody" width="5%">
         <nav>
             <a href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
@@ -48,7 +48,7 @@ $totalPrice=0;
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="../resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>

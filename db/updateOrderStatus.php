@@ -16,11 +16,11 @@ $failMsg="Failed to Update Order Status";
 $result = mysqli_query($conn,$sql) or die(mysqli_error());
 if($result){
     echo "<script type = 'text/javascript'> alert('$successMsg'); </script>";
-    echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_orderDetails.php?orderID=$id' </script>";
+    echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_orderDetails.php?order_ID=$id' </script>";
 }
 else {
     echo "<script type = 'text/javascript'> alert('$failMsg'); </script>";
-    echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_orderDetails.php?orderID=$id' </script>";
+    echo "<script type = 'text/javascript'> window.location='../restaurant_owner/ro_orderDetails.php?order_ID=$id' </script>";
 }
 
 mysqli_close();

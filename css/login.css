@@ -1,0 +1,37 @@
+#UMPlogo { margin-left: 31.5%; }
+#Foodylogo { margin-left: 5%; }
+
+  .login {
+    width: 300px;
+    padding: 50px;
+    margin-left: 455px;
+  }
+  
+  input[type=text], input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    background-color: darkturquoise;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: mediumturquoise;
+  }
+
+  .error {
+    color: red;
+    text-align: center; 
+ }

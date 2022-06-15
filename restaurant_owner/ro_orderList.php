@@ -23,8 +23,8 @@ $rowcount=mysqli_num_rows($result);
 
 <body>
     <header class="wrapper">
-        <img src="../resources/umplogo.png" alt="UMP" width="5%">
-        <img src="../resources/foodylogo.png" alt="Foody" width="5%">
+        <img src="../resources/ump logo.png" alt="UMP" width="5%">
+        <img src="../resources/foody logo.png" alt="Foody" width="5%">
         <nav>
             <a href="ro_dashboard.php">Dashboard</a>
             <a href="ro_menuList.php">Menu List</a>
@@ -33,7 +33,7 @@ $rowcount=mysqli_num_rows($result);
             <a href="ro_report.php">Restaurant Report</a>
             <a href="#">Logout</a>
         </nav>
-        <img src="../resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>
@@ -63,7 +63,7 @@ $rowcount=mysqli_num_rows($result);
                         echo "<td>".$row['orderDate']."</td>";
                         echo "<td>".$row['orderTime']."</td>";
                         echo "<td>".$row['orderStatus']."</td>";
-                        echo "<td><a class='btn' href='ro_orderDetails.php?orderID=".$row['order_ID']."'>Details</a></td>";
+                        echo "<td><a class='btn' href='ro_orderDetails.php?order_ID=".$row['order_ID']."'>Details</a></td>";
                         echo "</tr>";
                     }
                 }

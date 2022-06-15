@@ -1,25 +1,73 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2022 at 09:55 AM
--- Server version: 8.0.28
--- PHP Version: 8.1.6
+-- Generation Time: Jun 15, 2022 at 09:52 AM
+-- Server version: 8.0.23
+-- PHP Version: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `foody`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `complaint_list`
+--
+
+CREATE TABLE `complaint_list` (
+  `complaint_ID` int NOT NULL,
+  `complaintType` varchar(30) DEFAULT NULL,
+  `complaintDesc` varchar(300) DEFAULT NULL,
+  `complaintDate` date DEFAULT NULL,
+  `complaintTime` time DEFAULT NULL,
+  `complaintStatus` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `order_ID` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `complaint_list`
+--
+
+INSERT INTO `complaint_list` (`complaint_ID`, `complaintType`, `complaintDesc`, `complaintDate`, `complaintTime`, `complaintStatus`, `order_ID`) VALUES
+(12, 'DAMAGED FOOD', 'lol', '2022-06-15', '02:06:15', 'IN INVESTIGATION', 1),
+(13, 'LATE DELIVERY', 'hoho', '2022-06-15', '02:12:20', 'IN INVESTIGATION', 3),
+(15, 'DAMAGED FOOD', 'll', '2022-06-15', '15:39:40', 'IN INVESTIGATION', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery`
+--
+
+CREATE TABLE `delivery` (
+  `delivery_ID` int NOT NULL,
+  `timeDelivered` time DEFAULT NULL,
+  `rider_username` varchar(100) DEFAULT NULL,
+  `rd_ID` int DEFAULT NULL,
+  `order_ID` int DEFAULT NULL,
+  `complaint_ID` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `feedback_ID` int NOT NULL,
+  `fDesc` varchar(100) DEFAULT NULL,
+  `fDate` date DEFAULT NULL,
+  `fTime` time DEFAULT NULL,
+  `order_ID` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -29,8 +77,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `food_categories` (
   `fc_ID` int NOT NULL,
-  `categoryName` varchar(30) NOT NULL,
-  `categoryPrice` float NOT NULL
+  `categoryName` varchar(100) DEFAULT NULL,
+  `categoryPrice` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -53,22 +101,22 @@ INSERT INTO `food_categories` (`fc_ID`, `categoryName`, `categoryPrice`) VALUES
 
 CREATE TABLE `menu_list` (
   `menu_ID` int NOT NULL,
-  `foodName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `foodPhoto` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `foodDesc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `foodAvailability` varchar(20) NOT NULL,
+  `foodName` varchar(100) DEFAULT NULL,
+  `foodPhoto` varchar(100) DEFAULT NULL,
+  `foodDesc` varchar(100) DEFAULT NULL,
+  `foodAvailability` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `fc_ID` int DEFAULT NULL,
-  `RO_username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `rd_ID` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `menu_list`
 --
 
-INSERT INTO `menu_list` (`menu_ID`, `foodName`, `foodPhoto`, `foodDesc`, `foodAvailability`, `fc_ID`, `RO_username`) VALUES
-(1, 'Nasi Lemak Ayam', 'nasi-lemak-ayam.png', 'Fragrant rice with peanuts and anchovies with a delicious sambal.', 'Available', 5, 'RE10001'),
-(2, 'Chicken Chop', 'chicken-chop.png', 'A pan-fried chicken covered with bold black pepper sauce plus Australian fries.', 'Not Available', 1, 'RE10001'),
-(3, 'Mee Goreng', 'mee-goreng.png', 'Yellow noodles stir fried in cooking oil with garlic, onion, chicken, chilli, cabbage, tomatoes and eggs.', 'Not Available', 2, 'RE10001');
+INSERT INTO `menu_list` (`menu_ID`, `foodName`, `foodPhoto`, `foodDesc`, `foodAvailability`, `fc_ID`, `rd_ID`) VALUES
+(2, 'Nasi Goreng Pattaya', '1-nasi-goreng-pattaya.png', 'A fried rice dish made by wrapping chicken fried rice in omelette.', 'Available', 5, 2),
+(3, 'Milo Dinasour', '2-milo-dinasour.png', 'A cup of iced Milo (a chocolate malt beverage) with undissolved Milo powder added on top of it.', 'Available', 6, 2),
+(4, 'Chicken Chop', '3-chicken-chop.png', 'A pan-fried chicken covered with bold black pepper sauce plus Australian fries.', 'Available', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -77,30 +125,24 @@ INSERT INTO `menu_list` (`menu_ID`, `foodName`, `foodPhoto`, `foodDesc`, `foodAv
 --
 
 CREATE TABLE `order_details` (
-  `id` int NOT NULL,
-  `menu_ID` int DEFAULT NULL,
+  `od_ID` int NOT NULL,
   `orderQuantity` int DEFAULT NULL,
-  `orderID` int DEFAULT NULL
+  `menu_ID` int DEFAULT NULL,
+  `order_ID` int DEFAULT NULL,
+  `totalPrice` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details` (`id`, `menu_ID`, `orderQuantity`, `orderID`) VALUES
-(1, 1, 1, 1),
-(2, 2, 2, 1),
-(3, 2, 1, 2),
-(4, 3, 3, 2),
-(5, 1, 1, 3),
-(6, 2, 1, 3),
-(7, 2, 1, 4),
-(8, 3, 2, 5),
-(9, 3, 2, 6),
-(10, 1, 1, 7),
-(11, 2, 3, 8),
-(12, 3, 2, 9),
-(13, 1, 2, 10);
+INSERT INTO `order_details` (`od_ID`, `orderQuantity`, `menu_ID`, `order_ID`, `totalPrice`) VALUES
+(1, 1, 2, 1, 7),
+(2, 1, 3, 1, 8),
+(3, 1, 4, 3, 10),
+(4, 1, 2, 3, 7),
+(5, 1, 2, 1, 7),
+(6, 1, 2, 5, 7);
 
 -- --------------------------------------------------------
 
@@ -109,78 +151,52 @@ INSERT INTO `order_details` (`id`, `menu_ID`, `orderQuantity`, `orderID`) VALUES
 --
 
 CREATE TABLE `order_list` (
-  `orderID` int NOT NULL,
+  `order_ID` int NOT NULL,
   `orderDate` date DEFAULT NULL,
   `orderTime` time DEFAULT NULL,
-  `totalAmount` float DEFAULT NULL,
-  `orderStatus` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `username` varchar(30) DEFAULT NULL,
-  `RO_username` varchar(30) DEFAULT NULL
+  `totalPayment` float DEFAULT NULL,
+  `orderStatus` varchar(100) DEFAULT NULL,
+  `delLocation` varchar(100) DEFAULT NULL,
+  `RO_username` varchar(100) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `rider_username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `order_list`
 --
 
-INSERT INTO `order_list` (`orderID`, `orderDate`, `orderTime`, `totalAmount`, `orderStatus`, `username`, `RO_username`) VALUES
-(1, '2022-04-02', '15:15:43', 27, 'Prepared', 'u1', 'RE10001'),
-(2, '2022-04-06', '15:15:00', 32.5, 'Prepared', 'u2', 'RE10001'),
-(3, '2022-04-13', '13:58:35', 100, 'Prepared', 'u1', 'RE10001'),
-(4, '2022-04-20', '12:03:26', 120, 'Prepared', 'u1', 'RE10001'),
-(5, '2022-04-24', '17:04:16', 50, 'Prepared', 'u2', 'RE10001'),
-(6, '2022-05-07', '17:04:16', 30, 'Prepared', 'u2', 'RE10001'),
-(7, '2022-05-14', '15:15:43', 21, 'Prepared', 'u2', 'RE10001'),
-(8, '2022-05-21', '15:15:43', 40, 'Prepared', 'u2', 'RE10001'),
-(9, '2022-05-28', '15:15:43', 10, 'Cancel', 'u1', 'RE10001'),
-(10, '2022-06-01', '15:15:43', 30, 'Cancel', 'u2', 'RE10001');
+INSERT INTO `order_list` (`order_ID`, `orderDate`, `orderTime`, `totalPayment`, `orderStatus`, `delLocation`, `RO_username`, `username`, `rider_username`) VALUES
+(1, '2022-06-15', '12:29:21', 22, 'Ordered', 'ds', NULL, NULL, NULL),
+(2, '2022-06-15', '14:00:09', NULL, 'Incomplete', NULL, NULL, NULL, NULL),
+(3, '2022-06-15', '14:04:59', 17, 'Ordered', 'ds', NULL, NULL, 'RU10001'),
+(4, '2022-06-15', '15:37:10', NULL, 'Incomplete', NULL, NULL, NULL, NULL),
+(5, '2022-06-15', '15:39:22', 7, 'Ordered', 'ds', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurant_details`
+-- Table structure for table `res_details`
 --
 
-CREATE TABLE `restaurant_details` (
+CREATE TABLE `res_details` (
   `rd_ID` int NOT NULL,
-  `rdName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `rdLocation` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `rdOpTime` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `rdContactNo` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `cuisinesType` varchar(30) NOT NULL,
-  `varietyType` varchar(30) NOT NULL,
-  `RO_username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `rdName` varchar(100) DEFAULT NULL,
+  `rdLocation` varchar(100) DEFAULT NULL,
+  `rdOpTime` varchar(100) DEFAULT NULL,
+  `rdContactNo` varchar(100) DEFAULT NULL,
+  `cuisinesType` varchar(100) DEFAULT NULL,
+  `varietyType` varchar(100) DEFAULT NULL,
+  `rdPhoto` varchar(100) DEFAULT NULL,
+  `RO_username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `restaurant_details`
+-- Dumping data for table `res_details`
 --
 
-INSERT INTO `restaurant_details` (`rd_ID`, `rdName`, `rdLocation`, `rdOpTime`, `rdContactNo`, `cuisinesType`, `varietyType`, `RO_username`) VALUES
-(1, 'Sri Pekan Chinese Food', '26, Jalan Tengku Arif Bendahara, 26600 Pekan, Pahang', '10:00 AM - 08:00 PM', '0129893560', 'Rice Noodles', 'Non-Halal', 'RE10003'),
-(2, 'AFOUR CAFE (A4 CAFE)', 'Lot 1,Jalan Satria,26600, 26600 Pekan, Pahang', '04:00 PM - 11:00 PM', '01116996977', 'Malaysian Food', 'Halal', 'RE10002'),
-(3, 'D\' Laman Western Cuisine', '118 Jalan Istana Melati, Kampung Mengkasar, 26600 Pekan, Pahang', '06:00 PM - 12:00 AM', '01137400233', 'Western', 'Halal', 'RE10001');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `restaurant_owner`
---
-
-CREATE TABLE `restaurant_owner` (
-  `RO_username` varchar(30) NOT NULL,
-  `ROPassword` varchar(30) NOT NULL,
-  `ROName` varchar(30) NOT NULL,
-  `ROAddress` varchar(100) NOT NULL,
-  `ROPhoneNum` varchar(20) NOT NULL,
-  `ROEmailAdd` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `restaurant_owner`
---
-
-INSERT INTO `restaurant_owner` (`RO_username`, `ROPassword`, `ROName`, `ROAddress`, `ROPhoneNum`, `ROEmailAdd`) VALUES
-('RE10001', '12345', 'Ali bin Abu', 'No 5, Jalan Petaling 1, Taman Petaling', '0127897955', 'aliabu@gmail.com');
+INSERT INTO `res_details` (`rd_ID`, `rdName`, `rdLocation`, `rdOpTime`, `rdContactNo`, `cuisinesType`, `varietyType`, `rdPhoto`, `RO_username`) VALUES
+(2, 'Sri Pekan Chinese Food', '26, Jalan Tengku Arif Bendahara, 26600 Pekan, Pahang', '10:00 AM - 08:00 PM', '0129893560', 'Rice Noodles', 'Non-Halal', '1-sri-pekan-chinese-food.png', 'RE10002');
 
 -- --------------------------------------------------------
 
@@ -189,25 +205,55 @@ INSERT INTO `restaurant_owner` (`RO_username`, `ROPassword`, `ROName`, `ROAddres
 --
 
 CREATE TABLE `user` (
-  `username` varchar(30) NOT NULL,
-  `password` varchar(30) DEFAULT NULL,
-  `name` varchar(30) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `phoneNum` varchar(20) DEFAULT NULL,
-  `emailAdd` varchar(50) DEFAULT NULL
+  `user_id` int NOT NULL,
+  `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `region` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `phoneNum` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `emailAdd` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `userType` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `password`, `name`, `address`, `phoneNum`, `emailAdd`) VALUES
-('u1', 'wjy322@', 'Wang Yi Bo', 'Residen Pelajar 5, Blok A, Universiti Malaysia Pahang, Kampus Pekan.', '0195110297', 'SD10001@student.ump.edu.my'),
-('u2', 'ysp0573', 'Aiman bin Hakim', 'Residen Pelajar 3, Blok H, Universiti Malaysia Pahang, Kampus Gambang.', '0139093847', 'SD10002@student.ump.edu.my');
+INSERT INTO `user` (`user_id`, `username`, `password`, `name`, `address`, `region`, `phoneNum`, `emailAdd`, `userType`) VALUES
+(1, 'AM10001', 'ehf234#', 'Iskandar bin Shah', 'No 27, Jalan Bunga Melati, Taman Harmoni, Pekan Pahang.', 'Pekan', '0130924843', 'iskandar@gmail.com', 'Admin'),
+(2, 'SD10001', 'wjy322@', 'Wang Yi Bo', 'Residen Pelajar 5, Blok A, Universiti Malaysia Pahang, Kampus Pekan.', 'Pekan', '0195110297', 'SD10001@student.ump.edu.my', 'General User'),
+(3, 'ST10004', 'sui8972', 'Ajay A/L Darsh', 'Residen Pelajar 2, Blok C, Universiti Malaysia Pahang, Kampus Gambang.', 'Gambang', '0189852737', 'ST10004@staff.ump.edu.my', 'General User'),
+(4, 'RE10002', 'guy897@', 'Ang Zhi Nuo', '26, Jalan Tengku Arif Bendahara, Pekan, Pahang.', 'Pekan', '0120294348', 'ang@gmail.com', 'Restaurant Owner'),
+(5, 'RU10001', 'qwert01', 'Ahmad bin Ali', '81, Jalan Dewan Bahasa 2, Kampung Raja, Pahang.', 'Gambang', '0125342651', 'ahmad77@gmail.com', 'Rider');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `complaint_list`
+--
+ALTER TABLE `complaint_list`
+  ADD PRIMARY KEY (`complaint_ID`),
+  ADD KEY `Test` (`order_ID`);
+
+--
+-- Indexes for table `delivery`
+--
+ALTER TABLE `delivery`
+  ADD PRIMARY KEY (`delivery_ID`),
+  ADD KEY `rider_username` (`rider_username`),
+  ADD KEY `rd_ID` (`rd_ID`),
+  ADD KEY `order_ID` (`order_ID`),
+  ADD KEY `complaint_ID` (`complaint_ID`);
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`feedback_ID`),
+  ADD KEY `order_ID` (`order_ID`);
 
 --
 -- Indexes for table `food_categories`
@@ -220,99 +266,148 @@ ALTER TABLE `food_categories`
 --
 ALTER TABLE `menu_list`
   ADD PRIMARY KEY (`menu_ID`),
-  ADD KEY `fk_fc_ID` (`fc_ID`);
+  ADD KEY `fc_ID` (`fc_ID`),
+  ADD KEY `rd_ID` (`rd_ID`);
 
 --
 -- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_orderID` (`orderID`),
-  ADD KEY `fk_menu_ID` (`menu_ID`);
+  ADD PRIMARY KEY (`od_ID`),
+  ADD KEY `menu_ID` (`menu_ID`),
+  ADD KEY `order_ID` (`order_ID`);
 
 --
 -- Indexes for table `order_list`
 --
 ALTER TABLE `order_list`
-  ADD PRIMARY KEY (`orderID`),
-  ADD KEY `fk_username` (`username`);
+  ADD PRIMARY KEY (`order_ID`),
+  ADD KEY `RO_username` (`RO_username`),
+  ADD KEY `username` (`username`),
+  ADD KEY `rider_name` (`rider_username`);
 
 --
--- Indexes for table `restaurant_details`
+-- Indexes for table `res_details`
 --
-ALTER TABLE `restaurant_details`
-  ADD PRIMARY KEY (`rd_ID`);
-
---
--- Indexes for table `restaurant_owner`
---
-ALTER TABLE `restaurant_owner`
-  ADD PRIMARY KEY (`RO_username`);
+ALTER TABLE `res_details`
+  ADD PRIMARY KEY (`rd_ID`),
+  ADD KEY `username` (`RO_username`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `complaint_list`
+--
+ALTER TABLE `complaint_list`
+  MODIFY `complaint_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `delivery`
+--
+ALTER TABLE `delivery`
+  MODIFY `delivery_ID` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `feedback_ID` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `food_categories`
 --
 ALTER TABLE `food_categories`
-  MODIFY `fc_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `fc_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `menu_list`
 --
 ALTER TABLE `menu_list`
-  MODIFY `menu_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `menu_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `od_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `orderID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `restaurant_details`
+-- AUTO_INCREMENT for table `res_details`
 --
-ALTER TABLE `restaurant_details`
-  MODIFY `rd_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `res_details`
+  MODIFY `rd_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `complaint_list`
+--
+ALTER TABLE `complaint_list`
+  ADD CONSTRAINT `complaint_list_ibfk_1` FOREIGN KEY (`order_ID`) REFERENCES `order_list` (`order_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `delivery`
+--
+ALTER TABLE `delivery`
+  ADD CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`rider_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `delivery_ibfk_2` FOREIGN KEY (`rd_ID`) REFERENCES `res_details` (`rd_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `delivery_ibfk_3` FOREIGN KEY (`order_ID`) REFERENCES `order_list` (`order_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `delivery_ibfk_4` FOREIGN KEY (`complaint_ID`) REFERENCES `complaint_list` (`complaint_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`order_ID`) REFERENCES `order_list` (`order_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `menu_list`
 --
 ALTER TABLE `menu_list`
-  ADD CONSTRAINT `fk_fc_ID` FOREIGN KEY (`fc_ID`) REFERENCES `food_categories` (`fc_ID`);
+  ADD CONSTRAINT `menu_list_ibfk_1` FOREIGN KEY (`fc_ID`) REFERENCES `food_categories` (`fc_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `menu_list_ibfk_2` FOREIGN KEY (`rd_ID`) REFERENCES `res_details` (`rd_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD CONSTRAINT `fk_menu_ID` FOREIGN KEY (`menu_ID`) REFERENCES `menu_list` (`menu_ID`),
-  ADD CONSTRAINT `fk_orderID` FOREIGN KEY (`orderID`) REFERENCES `order_list` (`orderID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`menu_ID`) REFERENCES `menu_list` (`menu_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`order_ID`) REFERENCES `order_list` (`order_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_list`
 --
 ALTER TABLE `order_list`
-  ADD CONSTRAINT `fk_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
-COMMIT;
+  ADD CONSTRAINT `order_list_ibfk_1` FOREIGN KEY (`RO_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_list_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_list_ibfk_3` FOREIGN KEY (`rider_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Constraints for table `res_details`
+--
+ALTER TABLE `res_details`
+  ADD CONSTRAINT `res_details_ibfk_1` FOREIGN KEY (`RO_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
