@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
 if(isset($_POST['submit'])) 
 { 
     $monthSelector = $_POST['monthSelector'];
@@ -199,7 +204,8 @@ include 'getInsight.php';
         <a href="index.php">Delivery Note</a> 
         <a href="deliveryRecord.php">Delivery Record</a> 
         <a class="active" href="riderReport.php">Rider Report</a>
-        <a href="logout.php" onclick="return checklogout()">Logout</a>
+        <script src="../js/logout.js"></script>
+        <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
         <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>

@@ -1,7 +1,9 @@
 <?php
 session_start();
-$_SESSION['rider_username']="";
-$rider_username=$_SESSION['rider_username'];
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +12,7 @@ $rider_username=$_SESSION['rider_username'];
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+    <link rel="icon" href="../resources/favicon.png">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -135,7 +137,8 @@ $rider_username=$_SESSION['rider_username'];
         <a class="active" href="index.php">Delivery Note</a> 
         <a href="deliveryRecord.php">Delivery Record</a> 
         <a href="riderReport.php">Rider Report</a>
-        <a href="logout.php" onclick="return checklogout()">Logout</a>
+        <script src="../js/logout.js"></script>
+        <a href="javascript:void(0);" onclick="return logout();">Logout</a>
         </nav>
         <a href="profile.php"><img src="../resources/profile.jpg" alt="profile" width="80" height="80"></a>
         <br>

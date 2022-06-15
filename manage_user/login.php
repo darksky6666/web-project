@@ -46,6 +46,7 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['genUser']))
                     exit();
                 }
                 else{
+                    $_SESSION['rider_username']=$uname;
                     header("Location: ../rider/index.php");
                     exit();
                 }
