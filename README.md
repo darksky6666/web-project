@@ -4,8 +4,8 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/darksky6666/web-project)
 
 ## Progress
-- [x] Manage user
-- [x] Restaurant Owner
+- [x] ~~Manage user~~
+- [x] ~~Restaurant Owner~~
 - [ ] Complaint
 - [ ] Rider
 - [ ] General User
