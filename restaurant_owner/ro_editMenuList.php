@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
 $RO_username=$_SESSION['RO_username'];
 include '../db/db.php';
 $id = $_GET['id'];
@@ -41,7 +45,7 @@ $cPrice = $row['categoryPrice'];
             <a href="ro_restaurantDetails.php">Restaurant Details</a>
             <a href="ro_orderList.php">Order List</a>
             <a href="ro_report.php">Restaurant Report</a>
-            <a href="#">Logout</a>
+            <a href="../manage_user/logout.php">Logout</a>
         </nav>
         <img src="../resources/../resources/profile.jpg" alt="profile" width="5%">
         <br>

@@ -1,7 +1,10 @@
 <?php
 include '../db/db.php';
 session_start();
-$_SESSION['RO_username']='RE10002';
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
 $RO_username=$_SESSION['RO_username'];
 
 $resultrdID = mysqli_query($conn, "SELECT `rd_ID` FROM `res_details` WHERE `RO_username`='$RO_username'") or die(mysqli_error());
@@ -210,7 +213,7 @@ while ($rowAmount=mysqli_fetch_array($resultAmount)) {
             <a href="ro_restaurantDetails.php">Restaurant Details</a>
             <a href="ro_orderList.php">Order List</a>
             <a href="ro_report.php">Restaurant Report</a>
-            <a href="#">Logout</a>
+            <a href="../manage_user/logout.php">Logout</a>
         </nav>
         <img src="../resources/../resources/profile.jpg" alt="profile" width="5%">
         <br>

@@ -31,24 +31,24 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['genUser']))
             $row = mysqli_fetch_assoc($result);
             if ($row['username'] === $uname && $row['password'] === $pass && $row['userType'] === $genUser ) {
                 echo "Logged in!";
-                $_SESSION['username'] = $row['username'];
-               if($genUser=="Admin"){ 
-                header("Location: userList.php");
-                exit();
-               }
-               elseif($genUser=="General User"){
-                header("Location: ../general_user/resList.php");
-                exit();
-               }
-               elseif($genUser=="Restaurant Owner"){
-                header("Location: ../restaurant_owner/ro_dashboard.php");
-                exit();
-               }
-               else{
-                header("Location: ../rider/index.php");
-                exit();
-               }
-
+                $_SESSION['logged_in'] = true;
+                if($genUser=="Admin"){ 
+                    header("Location: userList.php");
+                    exit();
+                }
+                elseif($genUser=="General User"){
+                    header("Location: ../general_user/resList.php");
+                    exit();
+                }
+                elseif($genUser=="Restaurant Owner"){
+                    $_SESSION['RO_username']=$uname;
+                    header("Location: ../restaurant_owner/ro_dashboard.php");
+                    exit();
+                }
+                else{
+                    header("Location: ../rider/index.php");
+                    exit();
+                }
             }else{
                 header("Location: indexLogin.php?error=Incorect Username/Password/UserType!");
                 exit();

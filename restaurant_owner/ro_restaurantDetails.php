@@ -1,6 +1,10 @@
 <?php
 include '../db/db.php';
 session_start();
+if (empty($_SESSION['logged_in'])) {
+    header("Location: ../manage_user/indexLogin.php");
+    exit();
+}
 $RO_username=$_SESSION['RO_username'];
 
 $testLoc="../resources/restaurant/$RO_username";
@@ -51,9 +55,9 @@ $rdPhoto = $row['rdPhoto'] ?? "no-image.png";
             <a class="active" href="ro_restaurantDetails.php">Restaurant Details</a>
             <a href="ro_orderList.php">Order List</a>
             <a href="ro_report.php">Restaurant Report</a>
-            <a href="#">Logout</a>
+            <a href="../manage_user/logout.php">Logout</a>
         </nav>
-        <img src="../resources/../resources/profile.jpg" alt="profile" width="5%">
+        <img src="../resources/profile.jpg" alt="profile" width="5%">
         <br>
         <h3 class="center-text">Off Oven, On Doorstep</h3>
     </header>
@@ -129,7 +133,7 @@ $rdPhoto = $row['rdPhoto'] ?? "no-image.png";
                 <tr>
                     <td class="t-border th">Photo</td>
                     <td class="t-border col-20">
-                        <img id="image" style="padding-right: 10px; object-fit: fill; width: 70%" src="../resources/restaurant<?php echo $RO_username ?>/<?php echo $rdPhoto; ?>" alt="<?php echo $rdPhoto; ?>">
+                        <img id="image" style="padding-right: 10px; object-fit: fill; width: 70%" src="../resources/restaurant/<?php echo $RO_username ?>/<?php echo $rdPhoto; ?>" alt="<?php echo $rdPhoto; ?>">
                         <br>
                         <br>
                         <br>
