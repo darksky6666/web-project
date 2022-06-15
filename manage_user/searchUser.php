@@ -125,9 +125,10 @@ if (empty($_SESSION['logged_in'])) {
     <a class="active" href="userList.php">User List</a>
     <a href="createNewUser.php">Create User</a>
     <a href="userReport.php">User Report</a>
-    <a href="Logout.php" onclick="return checklogout()">Logout</a>
-    <a href="#IndexAdminViewComplaint">Complaint List</a>
-    <a href="#complaintReport">Complaint Report</a>
+    <a href="../complaint/IndexAdminViewComplaint.php">Complaint List</a>
+    <a href="../complaint/complaintReport.php">Complaint Report</a>
+    <script src="../js/logout.js"></script>
+    <a href="javascript:void(0);" onclick="return logout();">Logout</a>
     </nav>
     <a><img src="../resources/../resources/profile.jpg" alt="profile" width="80" height="80"></a>
     <br>
